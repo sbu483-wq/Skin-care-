@@ -1,118 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDSBBSQ6ZW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HDSBBSQ6ZW');
-</script>
-
-
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA — Pure Botanical Skincare</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>AURA — Premium Botanical Skincare & Clinical Rituals</title>
     <style>
-        /* --- 1. DESIGN TOKENS & RESET --- */
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
         :root {
-            --primary: #4A5D4E;       /* Deep Sage Green */
-            --primary-light: #6B7F6F;
-            --accent: #D4A373;        /* Warm Sand/Gold */
-            --bg-cream: #FAF7F2;      /* Soft Luxury Linen */
-            --bg-white: #FFFFFF;
-            --text-dark: #2C332E;     /* Charcoal with Green Undertones */
-            --text-muted: #606C5D;
-            --border-color: #E6E1DA;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            --shadow-sm: 0 2px 8px rgba(74, 93, 78, 0.04);
-            --shadow-md: 0 10px 30px rgba(74, 93, 78, 0.08);
-            --shadow-lg: 0 20px 50px rgba(74, 93, 78, 0.12);
+            --cls-primary: #1e2d24;
+            --cls-primary-light: #2d4235;
+            --cls-accent: #d4a373;
+            --cls-accent-light: #faedcd;
+            --cls-accent-muted: #e9d8a6;
+            --cls-bg-cream: #fefae0;
+            --cls-bg-stone: #f8f9fa;
+            --cls-bg-white: #ffffff;
+            --cls-text-dark: #212529;
+            --cls-text-muted: #6c757d;
+            --cls-border: #e5e5e5;
+            --cls-success: #2a9d8f;
+            
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-fast: all 0.2s ease;
+            
+            --radius-sm: 4px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            --site-max-width: 1440px;
         }
 
-        * {
+        [data-theme="dark"] {
+            --cls-primary: #f8f9fa;
+            --cls-primary-light: #e5e5e5;
+            --cls-accent: #e9d8a6;
+            --cls-accent-light: #2d4235;
+            --cls-accent-muted: #1e2d24;
+            --cls-bg-cream: #121815;
+            --cls-bg-stone: #1a231f;
+            --cls-bg-white: #1f2a24;
+            --cls-text-dark: #f8f9fa;
+            --cls-text-muted: #adb5bd;
+            --cls-border: #2d4235;
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            outline: none;
         }
 
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
+            font-family: var(--font-sans);
+            background-color: var(--cls-bg-stone);
+            color: var(--cls-text-dark);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        h1, h2, h3, h4, .serif {
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--cls-primary);
         }
 
         a {
-            text-decoration: none;
             color: inherit;
-            transition: var(--transition);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            background: none;
+            border: none;
+            outline: none;
         }
 
         img {
             max-width: 100%;
-            height: auto;
             display: block;
+            height: auto;
+            object-fit: cover;
         }
 
-        button {
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-family: inherit;
-            transition: var(--transition);
+        ul {
+            list-style: none;
         }
 
-        /* --- REUSABLE UTILITIES --- */
-        .container {
-            max-width: 1300px;
+        /* ==========================================================================
+           3. UTILITIES & LAYOUT CONTEXTS
+           ========================================================================== */
+        .section-container {
+            max-width: var(--site-max-width);
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 80px 40px;
         }
 
-        .section-padding {
-            padding: 120px 0;
+        @media (max-width: 768px) {
+            .section-container {
+                padding: 40px 20px;
+            }
         }
 
-        .text-center { text-align: center; }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-        .section-header {
-            max-width: 600px;
-            margin: 0 auto 60px auto;
+        .grid-responsive {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .section-title-wrapper {
             text-align: center;
+            margin-bottom: 60px;
+            position: relative;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+        .section-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--cls-accent);
+            margin-bottom: 12px;
+            display: block;
+            font-weight: 600;
         }
 
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+        .section-title {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background-color: var(--cls-accent);
         }
 
         .btn {
@@ -120,132 +175,139 @@
             align-items: center;
             justify-content: center;
             padding: 14px 32px;
+            border-radius: var(--radius-full);
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
             text-transform: uppercase;
-            border-radius: 0;
-            position: relative;
-            z-index: 1;
         }
 
         .btn-primary {
-            background-color: var(--primary);
-            color: var(--bg-cream);
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            border: 1px solid var(--cls-primary);
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-light);
+            background-color: transparent;
+            color: var(--cls-primary);
             transform: translateY(-2px);
         }
 
         .btn-outline {
-            border: 1px solid var(--primary);
-            color: var(--primary);
+            background-color: transparent;
+            color: var(--cls-primary);
+            border: 1px solid var(--cls-primary);
         }
 
         .btn-outline:hover {
-            background-color: var(--primary);
-            color: var(--bg-cream);
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            transform: translateY(-2px);
         }
 
-        /* --- 2. ANNOUNCEMENT BAR & NAVIGATION --- */
-        .announcement-bar {
-            background-color: var(--primary);
-            color: var(--bg-cream);
-            text-align: center;
-            padding: 8px 0;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
-
-        header {
-            background-color: rgba(250, 247, 242, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: sticky;
+        /* ==========================================================================
+           4. NAVIGATION HEADER
+           ========================================================================== */
+        .main-header {
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--cls-border);
+            transition: var(--transition-smooth);
         }
 
-        header.scrolled {
-            padding: 5px 0;
+        [data-theme="dark"] .main-header {
+            background-color: rgba(31, 42, 36, 0.85);
+        }
+
+        .header-scrolled {
+            padding: 10px 0;
             box-shadow: var(--shadow-sm);
         }
 
         .nav-container {
+            max-width: var(--site-max-width);
+            margin: 0 auto;
+            padding: 20px 40px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            height: 80px;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
         }
 
-        .logo {
+        .header-scrolled .nav-container {
+            padding: 10px 40px;
+        }
+
+        .brand-logo {
+            font-family: var(--font-display);
             font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            color: var(--primary);
+            letter-spacing: 4px;
+            font-weight: 400;
+            color: var(--cls-primary);
         }
 
         .nav-menu {
             display: flex;
             gap: 40px;
-            list-style: none;
         }
 
-        .nav-menu a {
+        .nav-item {
+            position: relative;
             font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            position: relative;
-            padding: 5px 0;
+            padding: 10px 0;
         }
 
-        .nav-menu a::after {
+        .nav-item::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
             height: 1px;
-            background-color: var(--accent);
-            transition: var(--transition);
+            background-color: var(--cls-accent);
+            transition: var(--transition-smooth);
         }
 
-        .nav-menu a:hover::after,
-        .nav-menu a.active::after {
+        .nav-item:hover::after {
             width: 100%;
         }
 
-        .nav-icons {
+        .nav-actions {
             display: flex;
             align-items: center;
             gap: 24px;
         }
 
-        .nav-icon-btn {
-            font-size: 1.2rem;
-            color: var(--primary);
+        .action-icon-btn {
             position: relative;
+            cursor: pointer;
+            color: var(--cls-primary);
+            transition: var(--transition-fast);
         }
 
-        .nav-icon-btn:hover {
-            color: var(--accent);
+        .action-icon-btn:hover {
+            color: var(--cls-accent);
+            transform: scale(1.05);
         }
 
-        .cart-count {
+        .cart-badge {
             position: absolute;
-            top: -8px;
+            top: -6px;
             right: -10px;
-            background-color: var(--accent);
-            color: white;
-            font-size: 0.65rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--cls-accent);
+            color: #ffffff;
+            font-size: 0.7rem;
             font-weight: 700;
             width: 18px;
             height: 18px;
@@ -255,684 +317,1041 @@
             justify-content: center;
         }
 
-        .mobile-toggle {
+        .menu-toggle {
             display: none;
-            font-size: 1.4rem;
-            color: var(--primary);
         }
 
-        /* --- 3. HERO SECTION --- */
-        .hero {
-            height: calc(100vh - 116px);
-            min-height: 600px;
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--cls-bg-white);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 60px;
+                gap: 30px;
+                transition: var(--transition-smooth);
+                z-index: 999;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        /* ==========================================================================
+           5. HERO THEATER SECTION
+           ========================================================================== */
+        .hero-section {
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            background-color: var(--cls-bg-cream);
             position: relative;
-            background-color: #EAE5DD;
+            padding-top: 80px;
             overflow: hidden;
         }
 
-        .hero-split {
+        .hero-bg-graphic {
+            position: absolute;
+            right: -10%;
+            top: -10%;
+            width: 60%;
+            height: 120%;
+            background: linear-gradient(135deg, rgba(212,163,115,0.1) 0%, rgba(254,250,224,0.2) 100%);
+            border-radius: 45% 55% 40% 60% / 45% 50% 50% 55%;
+            z-index: 1;
+            animation: morphingGraphic 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes morphingGraphic {
+            0% { border-radius: 45% 55% 40% 60% / 45% 50% 50% 55%; }
+            50% { border-radius: 50% 45% 55% 40% / 50% 40% 60% 50%; }
+            100% { border-radius: 45% 55% 40% 60% / 45% 50% 50% 55%; }
+        }
+
+        .hero-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            width: 100%;
-            height: 100%;
             align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
 
         .hero-content {
-            padding-right: 60px;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeInUp 1.2s forwards cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+            animation: heroFadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        .hero-subtitle {
-            font-size: 0.85rem;
+        @keyframes heroFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tagline {
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: var(--text-muted);
+            color: var(--cls-accent);
+            font-weight: 600;
             margin-bottom: 20px;
             display: block;
-            font-weight: 600;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.15;
-            color: var(--primary);
-            margin-bottom: 30px;
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 28px;
+            color: var(--cls-primary);
         }
 
-        .hero p.hero-desc {
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        .hero-description {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: var(--cls-text-muted);
             margin-bottom: 40px;
-            max-width: 520px;
+            max-width: 580px;
         }
 
-        .hero-image-wrapper {
+        @media (max-width: 992px) {
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .hero-btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .hero-btn-group {
+                justify-content: center;
+            }
+        }
+
+        .hero-visual-frame {
             position: relative;
-            height: 100%;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: heroFadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+        }
+
+        .hero-img-wrapper {
             width: 100%;
+            height: 600px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        @media (max-width: 992px) {
+            .hero-img-wrapper {
+                height: 400px;
+            }
+        }
+
+        .hero-img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #e9d8a6, #faedcd);
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center;
+            color: var(--cls-primary);
+            font-family: var(--font-display);
+            font-size: 1.8rem;
         }
 
-        .hero-bg-img {
-            width: 90%;
-            height: 85%;
-            object-fit: cover;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transform: scale(1.05);
-            animation: scaleIn 1.4s forwards cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .hero-floating-card {
+        .hero-badge-floating {
             position: absolute;
-            bottom: 15%;
-            left: 0;
-            background-color: var(--bg-white);
-            padding: 24px;
-            box-shadow: var(--shadow-lg);
-            max-width: 260px;
-            opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeInLeft 1.2s forwards cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
-        }
-
-        .hero-floating-card i {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .hero-floating-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-            color: var(--primary);
-        }
-
-        .hero-floating-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* --- 4. BRAND VALUES --- */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .value-card {
-            background-color: var(--bg-white);
-            padding: 40px 30px;
-            text-align: center;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .value-card:hover {
-            border-bottom-color: var(--accent);
-            transform: translateY(-5px);
+            bottom: 40px;
+            left: -30px;
+            background-color: var(--cls-bg-white);
+            padding: 20px 30px;
+            border-radius: var(--radius-md);
             box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 3;
         }
 
-        .value-icon-box {
-            width: 70px;
-            height: 70px;
-            background-color: var(--bg-cream);
+        @media (max-width: 992px) {
+            .hero-badge-floating {
+                display: none;
+            }
+        }
+
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--cls-accent-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--cls-primary);
+        }
+
+        .badge-text-main {
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: block;
+        }
+
+        .badge-text-sub {
+            font-size: 0.75rem;
+            color: var(--cls-text-muted);
+        }
+
+        /* ==========================================================================
+           6. BRAND FOCUS & BENEFITS BLOCK
+           ========================================================================== */
+        .benefits-section {
+            background-color: var(--cls-bg-white);
+        }
+
+        .benefits-inner-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .benefits-inner-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .benefits-inner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+            transition: var(--transition-smooth);
+            border-radius: var(--radius-md);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--cls-bg-stone);
+        }
+
+        .benefit-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background-color: var(--cls-bg-stone);
+            border-radius: 50%;
             margin: 0 auto 24px auto;
-            color: var(--primary);
-            font-size: 1.6rem;
-            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cls-accent);
+            transition: var(--transition-smooth);
         }
 
-        .value-card:hover .value-icon-box {
-            background-color: var(--primary);
-            color: var(--bg-cream);
+        .benefit-card:hover .benefit-icon-wrapper {
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
         }
 
-        .value-card h3 {
+        .benefit-title {
             font-size: 1.25rem;
             margin-bottom: 12px;
-            color: var(--primary);
         }
 
-        .value-card p {
+        .benefit-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--cls-text-muted);
         }
 
-        /* --- 5. CATEGORY CATALOG (FILTER) --- */
-        .catalog-filter-bar {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+        /* ==========================================================================
+           7. INTERACTIVE SKIN PROFILE QUIZ CONTROLLER
+           ========================================================================== */
+        .quiz-section {
+            background-color: var(--cls-bg-cream);
+        }
+
+        .quiz-card-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: var(--cls-bg-white);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 576px) {
+            .quiz-card-container {
+                padding: 30px 20px;
+            }
+        }
+
+        .quiz-progress-bar-wrapper {
+            width: 100%;
+            height: 4px;
+            background-color: var(--cls-border);
+            border-radius: var(--radius-full);
             margin-bottom: 40px;
+            overflow: hidden;
         }
 
-        .filter-btn {
-            padding: 10px 24px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: var(--bg-white);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
+        .quiz-progress-fill {
+            height: 100%;
+            width: 33.33%;
+            background-color: var(--cls-accent);
+            transition: var(--transition-smooth);
         }
 
-        .filter-btn:hover,
-        .filter-btn.active {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            color: var(--bg-cream);
+        .quiz-step-pane {
+            display: none;
         }
 
-        .search-sort-wrapper {
+        .quiz-step-pane.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-question-text {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .quiz-options-vertical-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 45px;
+        }
+
+        .quiz-option-pill {
+            padding: 18px 24px;
+            border: 1px solid var(--cls-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-option-pill:hover {
+            border-color: var(--cls-accent);
+            background-color: rgba(214, 163, 115, 0.04);
+        }
+
+        .quiz-option-pill.selected {
+            border-color: var(--cls-primary);
+            background-color: var(--cls-accent-light);
+            color: var(--cls-primary);
+        }
+
+        .quiz-nav-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-result-payload {
+            text-align: center;
+            display: none;
+        }
+
+        .quiz-result-payload.active {
+            display: block;
+        }
+
+        .quiz-reco-product-link-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed var(--cls-accent);
+            border-radius: var(--radius-md);
+            display: inline-block;
+        }
+
+        /* ==========================================================================
+           8. DYNAMIC PRODUCT CATALOG (FILTERS & GRID)
+           ========================================================================== */
+        .catalog-filter-controls-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            flex-wrap: wrap;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .search-box {
+        .filter-tags-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            background-color: var(--cls-bg-white);
+            border: 1px solid var(--cls-border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            letter-spacing: 0.5px;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            border-color: var(--cls-primary);
+        }
+
+        .search-input-field-wrapper {
             position: relative;
-            max-width: 350px;
-            width: 100%;
+            min-width: 300px;
         }
 
-        .search-box input {
+        @media (max-width: 576px) {
+            .search-input-field-wrapper {
+                width: 100%;
+            }
+        }
+
+        .search-box-element {
             width: 100%;
-            padding: 12px 16px 12px 45px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-white);
-            font-family: inherit;
+            padding: 12px 20px 12px 45px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--cls-border);
+            background-color: var(--cls-bg-white);
             font-size: 0.9rem;
-            transition: var(--transition);
+            transition: var(--transition-fast);
         }
 
-        .search-box input:focus {
-            border-color: var(--primary);
+        .search-box-element:focus {
+            border-color: var(--cls-accent);
+            box-shadow: var(--shadow-sm);
         }
 
-        .search-box i {
+        .search-icon-embedded {
             position: absolute;
-            left: 16px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: var(--cls-text-muted);
+            pointer-events: none;
         }
 
-        .sort-box select {
-            padding: 12px 24px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-white);
-            font-family: inherit;
-            font-size: 0.9rem;
-            color: var(--text-dark);
+        /* ==========================================================================
+           9. MATRICULATED PRODUCT CARD COMPONENT
+           ========================================================================== */
+        .product-card-frame {
+            background-color: var(--cls-bg-white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .product-card-frame:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-card-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background-color: var(--cls-bg-stone);
+            overflow: hidden;
             cursor: pointer;
         }
 
-        /* --- 6. PRODUCT GRID & CARD --- */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px 30px;
-        }
-
-        .product-card {
-            background-color: var(--bg-white);
-            position: relative;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .product-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-4px);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: var(--accent);
-            color: white;
-            padding: 4px 10px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-            z-index: 2;
-        }
-
-        .product-image-container {
-            position: relative;
-            overflow: hidden;
-            background-color: #F2EFE9;
-            padding-top: 125%; /* 4:5 Aspect Ratio */
-        }
-
-        .product-image-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .product-card-img-placeholder {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9d8a6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--cls-primary-light);
+            transition: var(--transition-smooth);
         }
 
-        .product-card:hover .product-image-container img {
+        .product-card-frame:hover .product-card-img-placeholder {
             transform: scale(1.06);
         }
 
-        .product-action-overlay {
+        .product-ribbon-tag {
             position: absolute;
-            bottom: -60px;
+            top: 15px;
+            left: 15px;
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            z-index: 2;
+        }
+
+        .product-action-overlay-trigger-box {
+            position: absolute;
+            bottom: -50px;
             left: 0;
             width: 100%;
             padding: 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
             display: flex;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(to top, rgba(44,51,46,0.4), transparent);
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             z-index: 3;
         }
 
-        .product-card:hover .product-action-overlay {
+        .product-card-frame:hover .product-action-overlay-trigger-box {
             bottom: 0;
         }
 
-        .action-btn {
+        .quick-view-circle-btn {
             width: 45px;
             height: 45px;
-            background-color: var(--bg-white);
-            color: var(--primary);
+            background-color: var(--cls-bg-white);
+            color: var(--cls-primary);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-sm);
-            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
         }
 
-        .action-btn:hover {
-            background-color: var(--primary);
-            color: var(--bg-white);
+        .quick-view-circle-btn:hover {
+            background-color: var(--cls-accent);
+            color: #ffffff;
+            transform: scale(1.1);
         }
 
-        .product-info-box {
-            padding: 24px;
+        .product-metadata-body {
+            padding: 25px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            text-align: center;
         }
 
-        .product-category {
+        .product-category-label {
             font-size: 0.75rem;
             text-transform: uppercase;
+            color: var(--cls-accent);
             letter-spacing: 1.5px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-
-        .product-rating {
-            color: #FFB100;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
-
-        .product-rating span {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            margin-left: 5px;
-        }
-
-        .product-price {
-            font-size: 1.1rem;
+            margin-bottom: 6px;
             font-weight: 600;
-            color: var(--text-dark);
-            margin-top: auto;
         }
 
-        /* --- 7. STORY / BANNER SECTION --- */
-        .story-banner {
-            background-color: var(--primary);
-            color: var(--bg-cream);
-            overflow: hidden;
-            padding: 0;
+        .product-headline-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            cursor: pointer;
         }
 
-        .story-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .product-headline-title:hover {
+            color: var(--cls-accent);
+        }
+
+        .product-rating-row {
+            display: flex;
             align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #ffb703;
         }
 
-        .story-image img {
-            width: 100%;
-            height: 650px;
-            object-fit: cover;
+        .rating-count-span {
+            color: var(--cls-text-muted);
+            font-size: 0.75rem;
+            margin-left: 4px;
         }
 
-        .story-content {
-            padding: 80px 100px;
+        .product-footer-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.04);
         }
 
-        .story-content h2 {
-            font-size: 2.8rem;
+        .product-price-display {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cls-primary);
+        }
+
+        .add-to-cart-action-btn {
+            background-color: var(--cls-bg-stone);
+            color: var(--cls-primary);
+            border: 1px solid var(--cls-border);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .add-to-cart-action-btn:hover {
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            border-color: var(--cls-primary);
+        }
+
+        /* ==========================================================================
+           10. EDITORIAL RITUALS / BLOG SECTION
+           ========================================================================== */
+        .rituals-section {
+            background-color: var(--cls-bg-white);
+        }
+
+        .editorial-magazine-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .editorial-magazine-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .editorial-article-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-media-container {
+            height: 280px;
+            background-color: var(--cls-bg-stone);
+            border-radius: var(--radius-md);
+            overflow: hidden;
             margin-bottom: 24px;
-            line-height: 1.2;
         }
 
-        .story-content p {
-            margin-bottom: 35px;
-            font-size: 1.05rem;
-            opacity: 0.85;
+        .article-media-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #2d4235, #1e2d24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cls-accent-light);
+            font-family: var(--font-display);
+            font-size: 1.3rem;
         }
 
-        /* --- 8. TESTIMONIALS --- */
-        .testimonials-container {
-            max-width: 900px;
-            margin: 0 auto;
+        .article-date {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--cls-accent);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .article-heading {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            font-size: 0.95rem;
+            color: var(--cls-text-muted);
+            margin-bottom: 16px;
+        }
+
+        .article-read-more-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--cls-primary);
+        }
+
+        .article-read-more-link:hover {
+            color: var(--cls-accent);
+        }
+
+        /* ==========================================================================
+           11. REAL CLIENT TESTIMONIALS SLIDER UI
+           ========================================================================== */
+        .testimonials-section {
+            background-color: var(--cls-bg-stone);
             position: relative;
         }
 
-        .testimonial-slide {
-            text-align: center;
-            background-color: var(--bg-white);
-            padding: 60px 50px;
-            box-shadow: var(--shadow-sm);
-            display: none;
+        .testimonial-carousel-viewport {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
         }
 
-        .testimonial-slide.active {
-            display: block;
-            animation: fadeIn 0.6s ease;
-        }
-
-        .quote-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.3;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            line-height: 1.5;
-            color: var(--primary);
-            margin-bottom: 30px;
-        }
-
-        .user-info h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .user-info p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .slider-controls {
+        .testimonial-track-container {
             display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .testimonial-slide-unit {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .testimonial-quote-body {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            line-height: 1.4;
+            color: var(--cls-primary);
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        @media (max-width: 640px) {
+            .testimonial-quote-body {
+                font-size: 1.4rem;
+            }
+        }
+
+        .testimonial-client-avatar-row {
+            display: flex;
+            align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-top: 30px;
         }
 
-        .slider-dot {
-            width: 10px;
-            height: 10px;
+        .avatar-circle-mock {
+            width: 60px;
+            height: 60px;
+            background-color: var(--cls-accent-light);
             border-radius: 50%;
-            background-color: var(--border-color);
-            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--cls-primary);
         }
 
-        .slider-dot.active {
-            background-color: var(--primary);
-            transform: scale(1.2);
+        .client-info-block {
+            text-align: left;
         }
 
-        /* --- 9. FAQ SECTION --- */
-        .faq-wrapper {
+        .client-profile-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .client-profile-status {
+            font-size: 0.8rem;
+            color: var(--cls-text-muted);
+        }
+
+        .carousel-arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--cls-bg-white);
+            border: 1px solid var(--cls-border);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition-fast);
+        }
+
+        .carousel-arrow-btn:hover {
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+        }
+
+        .carousel-arrow-left { left: 40px; }
+        .carousel-arrow-right { right: 40px; }
+
+        @media (max-width: 1024px) {
+            .carousel-arrow-btn { display: none; }
+        }
+
+        /* ==========================================================================
+           12. FREQUENTLY ASKED QUESTIONS ACCORDION
+           ========================================================================== */
+        .faq-section {
+            background-color: var(--cls-bg-white);
+        }
+
+        .faq-accordion-container {
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .faq-item {
-            background-color: var(--bg-white);
-            border: 1px solid var(--border-color);
-            margin-bottom: 15px;
-            transition: var(--transition);
+        .faq-item-node {
+            border-bottom: 1px solid var(--cls-border);
+            padding: 24px 0;
         }
 
-        .faq-header {
-            padding: 24px 30px;
+        .faq-trigger-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             cursor: pointer;
+            text-align: left;
         }
 
-        .faq-header h3 {
-            font-size: 1.15rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
-            color: var(--primary);
+        .faq-question-heading {
+            font-size: 1.2rem;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            color: var(--cls-primary);
         }
 
-        .faq-icon {
-            font-size: 1.1rem;
-            transition: var(--transition);
-            color: var(--text-muted);
+        .faq-icon-indicator {
+            transition: var(--transition-smooth);
         }
 
-        .faq-body {
+        .faq-item-node.active .faq-icon-indicator {
+            transform: rotate(180deg);
+        }
+
+        .faq-collapsible-panel {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 0 30px;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .faq-body p {
-            padding-bottom: 24px;
-            color: var(--text-muted);
+        .faq-answer-paragraph {
+            padding-top: 15px;
+            color: var(--cls-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           13. CONTACT RITUAL & MAP SYNERGY SECTION
+           ========================================================================== */
+        .contact-section {
+            background-color: var(--cls-bg-stone);
+        }
+
+        .contact-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        @media (max-width: 992px) {
+            .contact-split-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-methods-stack {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-method-node {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-method-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: var(--cls-bg-white);
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+            color: var(--cls-accent);
+        }
+
+        .contact-method-details h4 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-method-details p {
+            color: var(--cls-text-muted);
             font-size: 0.95rem;
         }
 
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-            color: var(--accent);
-        }
-
-        .faq-item.active .faq-body {
-            max-height: 200px;
-        }
-
-        /* --- 10. NEWSLETTER & FOOTER --- */
-        .newsletter {
-            background-color: #ECE7DF;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .newsletter-box {
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        .newsletter h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .newsletter p {
-            color: var(--text-muted);
-            margin-bottom: 35px;
-        }
-
-        .newsletter-form {
-            display: flex;
+        .contact-form-card {
+            background-color: var(--cls-bg-white);
+            border-radius: var(--radius-lg);
+            padding: 40px;
             box-shadow: var(--shadow-md);
         }
 
-        .newsletter-form input {
-            flex-grow: 1;
-            padding: 16px 24px;
-            border: none;
-            font-family: inherit;
-            font-size: 0.95rem;
-        }
-
-        .newsletter-form .btn {
-            white-space: nowrap;
-        }
-
-        footer {
-            background-color: #242925;
-            color: #D3DAD4;
-            padding: 80px 0 40px 0;
-            font-size: 0.9rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .footer-brand h3 {
-            font-size: 2rem;
-            color: var(--bg-cream);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .footer-brand p {
+        .form-input-group {
             margin-bottom: 24px;
-            line-height: 1.7;
-            opacity: 0.8;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-cream);
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .footer-links h4 {
-            font-size: 1.1rem;
-            color: white;
-            margin-bottom: 24px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .form-input-group label {
+            display: block;
+            font-size: 0.85rem;
             font-weight: 600;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--cls-primary);
         }
 
-        .footer-links ul {
-            list-style: none;
+        .form-text-input, .form-textarea-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid var(--cls-border);
+            border-radius: var(--radius-md);
+            background-color: var(--cls-bg-stone);
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
         }
 
-        .footer-links li {
-            margin-bottom: 12px;
+        .form-text-input:focus, .form-textarea-input:focus {
+            border-color: var(--cls-accent);
+            background-color: var(--cls-bg-white);
         }
 
-        .footer-links a {
-            opacity: 0.75;
+        /* ==========================================================================
+           14. NEWSLETTER SUBSCRIPTION BAR
+           ========================================================================== */
+        .newsletter-bar-section {
+            background-color: var(--cls-primary);
+            color: var(--cls-bg-stone);
+            text-align: center;
         }
 
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--accent);
-            padding-left: 4px;
+        .newsletter-bar-section h2 {
+            color: var(--cls-bg-stone);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
 
-        .footer-contact p {
-            margin-bottom: 12px;
+        .newsletter-bar-section p {
+            color: var(--cls-accent-light);
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form-inline-control {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--cls-bg-white);
+            padding: 6px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-md);
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            font-size: 0.8rem;
-            opacity: 0.7;
+        @media (max-width: 576px) {
+            .newsletter-form-inline-control {
+                flex-direction: column;
+                background-color: transparent;
+                padding: 0;
+                gap: 15px;
+                border-radius: 0;
+                box-shadow: none;
+            }
         }
 
-        /* --- 11. CART SIDE-DRAWER --- */
+        .newsletter-inline-input {
+            flex-grow: 1;
+            padding: 0 25px;
+            font-size: 0.95rem;
+            color: var(--cls-text-dark);
+        }
+
+        @media (max-width: 576px) {
+            .newsletter-inline-input {
+                background-color: var(--cls-bg-white);
+                padding: 15px 25px;
+                border-radius: var(--radius-full);
+            }
+        }
+
+        /* ==========================================================================
+           15. SHOPPING CART SIDEBAR DRAWERS
+           ========================================================================== */
         .cart-drawer-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(44, 51, 46, 0.4);
+            background-color: rgba(0,0,0,0.4);
             backdrop-filter: blur(4px);
             z-index: 2000;
             opacity: 0;
             pointer-events: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
         .cart-drawer-overlay.active {
@@ -940,146 +1359,147 @@
             pointer-events: auto;
         }
 
-        .cart-drawer {
+        .cart-drawer-panel {
             position: fixed;
             top: 0;
             right: -450px;
-            width: 450px;
-            max-width: 100%;
+            width: 100%;
+            max-width: 450px;
             height: 100%;
-            background-color: var(--bg-white);
+            background-color: var(--cls-bg-white);
             z-index: 2001;
             box-shadow: var(--shadow-lg);
+            transition: var(--transition-smooth);
             display: flex;
             flex-direction: column;
-            transition: var(--transition);
         }
 
-        .cart-drawer-overlay.active .cart-drawer {
+        .cart-drawer-overlay.active .cart-drawer-panel {
             right: 0;
         }
 
-        .cart-header {
-            padding: 24px 30px;
-            border-bottom: 1px solid var(--border-color);
+        .cart-panel-header {
+            padding: 30px;
+            border-bottom: 1px solid var(--cls-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .cart-header h3 {
-            font-size: 1.4rem;
-            color: var(--primary);
+        .cart-panel-header h3 {
+            font-size: 1.5rem;
         }
 
-        .close-cart {
-            font-size: 1.4rem;
-            color: var(--text-dark);
+        .cart-close-trigger {
+            cursor: pointer;
+            color: var(--cls-primary);
         }
 
-        .cart-items-body {
+        .cart-items-scroll-frame {
             flex-grow: 1;
             overflow-y: auto;
             padding: 30px;
-        }
-
-        .empty-cart-msg {
-            text-align: center;
-            color: var(--text-muted);
-            margin-top: 50px;
-        }
-
-        .empty-cart-msg i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            opacity: 0.3;
-        }
-
-        .cart-item {
             display: flex;
+            flex-direction: column;
             gap: 20px;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item-row-node {
+            display: flex;
+            gap: 15px;
             align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            padding-bottom: 15px;
         }
 
-        .cart-item-img {
+        .cart-item-thumbnail-placeholder {
             width: 80px;
-            height: 100px;
-            object-fit: cover;
-            background-color: var(--bg-cream);
+            height: 80px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #faedcd, #e9d8a6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--cls-primary);
         }
 
-        .cart-item-details {
+        .cart-item-details-box {
             flex-grow: 1;
         }
 
-        .cart-item-details h4 {
-            font-size: 1.05rem;
-            color: var(--primary);
+        .cart-item-title-text {
+            font-weight: 600;
+            font-size: 1rem;
             margin-bottom: 4px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
         }
 
-        .cart-item-price {
-            font-size: 0.95rem;
+        .cart-item-price-tag {
+            color: var(--cls-accent);
             font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
-        .cart-qty-control {
-            display: inline-flex;
-            border: 1px solid var(--border-color);
+        .cart-item-qty-controls-row {
+            display: flex;
             align-items: center;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        .cart-qty-control button {
-            padding: 4px 10px;
+        .qty-adjust-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--cls-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.8rem;
+            cursor: pointer;
         }
 
-        .cart-qty-control span {
-            padding: 0 10px;
+        .qty-display-span {
             font-size: 0.85rem;
             font-weight: 600;
         }
 
-        .remove-item-btn {
-            color: #C1121F;
-            font-size: 0.9rem;
-            margin-left: auto;
+        .cart-item-remove-trigger {
+            color: var(--cls-text-muted);
+            cursor: pointer;
+            transition: var(--transition-fast);
         }
 
-        .cart-footer {
+        .cart-item-remove-trigger:hover {
+            color: #d90429;
+        }
+
+        .cart-panel-footer-summary {
             padding: 30px;
-            border-top: 1px solid var(--border-color);
-            background-color: var(--bg-cream);
+            border-top: 1px solid var(--cls-border);
+            background-color: var(--cls-bg-stone);
         }
 
-        .cart-subtotal {
+        .summary-row-financial {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--text-dark);
         }
 
-        .cart-footer .btn {
-            width: 100%;
-        }
-
-        /* --- 12. PRODUCT QUICK VIEW MODAL --- */
-        .modal-overlay {
+        /* ==========================================================================
+           16. MASTER PRODUCT QUICK VIEW MODAL
+           ========================================================================== */
+        .modal-view-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(44, 51, 46, 0.5);
+            background-color: rgba(0,0,0,0.5);
             backdrop-filter: blur(6px);
             z-index: 3000;
             display: flex;
@@ -1087,894 +1507,1037 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             padding: 20px;
         }
 
-        .modal-overlay.active {
+        .modal-view-overlay.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .modal-window {
-            background-color: var(--bg-white);
-            max-width: 900px;
+        .modal-content-stage-box {
+            background-color: var(--cls-bg-white);
             width: 100%;
-            position: relative;
+            max-width: 900px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
             box-shadow: var(--shadow-lg);
+            position: relative;
             transform: scale(0.9);
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .modal-overlay.active .modal-window {
+        .modal-view-overlay.active .modal-content-stage-box {
             transform: scale(1);
         }
 
-        .close-modal {
+        .modal-close-corner-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--text-dark);
+            top: 25px;
+            right: 25px;
+            cursor: pointer;
             z-index: 10;
+            color: var(--cls-primary);
         }
 
-        .modal-grid {
+        .modal-split-layout-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
         }
 
-        .modal-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: #F2EFE9;
+        @media (max-width: 768px) {
+            .modal-split-layout-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .modal-content {
-            padding: 50px;
+        .modal-media-viewport {
+            height: 500px;
+            background-color: var(--cls-bg-stone);
+        }
+
+        @media (max-width: 768px) {
+            .modal-media-viewport {
+                height: 300px;
+            }
+        }
+
+        .modal-detail-narrative-panel {
+            padding: 45px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .modal-cat {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
+        @media (max-width: 576px) {
+            .modal-detail-narrative-panel {
+                padding: 25px;
+            }
         }
 
-        .modal-title {
+        .modal-product-title {
             font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .modal-price {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-dark);
+        .modal-product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cls-accent);
             margin-bottom: 20px;
         }
 
-        .modal-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .modal-product-desc {
+            color: var(--cls-text-muted);
             margin-bottom: 30px;
-            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
-        /* --- KEYFRAME ANIMATIONS --- */
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes fadeInLeft {
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* ==========================================================================
+           17. CORPORATE BRAND FOOTER UTILITIES
+           ========================================================================== */
+        .master-footer-node {
+            background-color: var(--cls-bg-cream);
+            border-top: 1px solid var(--cls-border);
+            padding-top: 80px;
+            padding-bottom: 40px;
         }
 
-        /* --- 13. RESPONSIVE MEDIA QUERIES --- */
-        @media (max-width: 1200px) {
-            .product-grid { grid-template-columns: repeat(3, 1fr); }
-            .values-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        .footer-columns-wrapper-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
         }
 
         @media (max-width: 992px) {
-            .hero-split { grid-template-columns: 1fr; height: auto; padding: 60px 0; }
-            .hero-content { padding-right: 0; margin-bottom: 40px; }
-            .hero-image-wrapper { justify-content: center; }
-            .hero-bg-img { width: 100%; }
-            .story-grid { grid-template-columns: 1fr; }
-            .story-image img { height: 400px; }
-            .story-content { padding: 60px 40px; }
-            .modal-grid { grid-template-columns: 1fr; }
-            .modal-image { display: none; }
-            .modal-content { padding: 40px 30px; }
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 24px; }
-            .section-padding { padding: 80px 0; }
-            .hero h1 { font-size: 2.8rem; }
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--bg-cream);
-                flex-direction: column;
-                padding: 40px;
-                gap: 30px;
-                transition: var(--transition);
-                border-top: 1px solid var(--border-color);
+            .footer-columns-wrapper-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .nav-menu.active { left: 0; }
-            .mobile-toggle { display: block; }
-            .search-sort-wrapper { flex-direction: column; align-items: stretch; }
-            .search-box { max-width: 100%; }
-            .footer-grid { grid-template-columns: 1fr; }
         }
 
-        @media (max-width: 480px) {
-            .product-grid { grid-template-columns: 1fr; }
-            .values-grid { grid-template-columns: 1fr; }
+        @media (max-width: 576px) {
+            .footer-columns-wrapper-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-brand-column p {
+            margin-top: 20px;
+            color: var(--cls-text-muted);
+            max-width: 280px;
+        }
+
+        .footer-header-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--cls-primary);
+        }
+
+        .footer-links-list-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links-list-stack a {
+            font-size: 0.95rem;
+            color: var(--cls-text-muted);
+        }
+
+        .footer-links-list-stack a:hover {
+            color: var(--cls-accent);
+            padding-left: 4px;
+        }
+
+        .footer-bottom-baseline {
+            border-top: 1px solid var(--cls-border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--cls-text-muted);
+            flex-wrap: wrap;
+            gap: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ANNOUNCEMENT BAR -->
-    <div class="announcement-bar">
-        Complimentary Botanical Cleanser on orders over $75 • Consciously Crafted
-    </div>
-
-    <!-- MAIN HEADER / NAVIGATION -->
-    <header id="main-header">
-        <div class="container nav-container">
-            <button class="mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
+    <!-- ==========================================================================
+       NAVIGATION SYSTEM BAR
+       ========================================================================== -->
+    <header class="main-header" id="siteHeader">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">AURA</a>
             
-            <a href="#" class="logo">AURA</a>
-            
-            <nav>
-                <ul class="nav-menu" id="nav-links">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#catalog">Catalog</a></li>
-                    <li><a href="#story">Our Story</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#catalog" class="nav-item">Catalog</a>
+                <a href="#quiz" class="nav-item">Skin Quiz</a>
+                <a href="#rituals" class="nav-item">Rituals</a>
+                <a href="#faq" class="nav-item">FAQ</a>
+                <a href="#contact" class="nav-item">Contact</a>
             </nav>
-            
-            <div class="nav-icons">
-                <button class="nav-icon-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <button class="nav-icon-btn" id="open-cart-btn" aria-label="Shopping Cart">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-count" id="global-cart-count">0</span>
-                </button>
+
+            <div class="nav-actions">
+                <div class="action-icon-btn" id="themeToggleBtn" aria-label="Toggle Theme">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z"></path></svg>
+                </div>
+                <div class="action-icon-btn" id="cartTriggerBtn" aria-label="Open Cart">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span class="cart-badge" id="cartCounterDisplay">0</span>
+                </div>
+                <div class="menu-toggle action-icon-btn" id="menuToggleBtn" aria-label="Open Menu">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="container h-100" style="height:100%;">
-            <div class="hero-split">
-                <div class="hero-content">
-                    <span class="hero-subtitle">100% Organic & Biodegradable</span>
-                    <h1>Nourish Your Skin With Botanical Alchemy</h1>
-                    <p class="hero-desc">We synthesize biocompatible plant extracts and pure elements into high-performance daily luxury essentials for radiant, resilient skin.</p>
-                    <a href="#catalog" class="btn btn-primary">Explore The Catalog</a>
+    <!-- ==========================================================================
+       HERO THEATER SECTION
+       ========================================================================== -->
+    <section class="hero-section">
+        <div class="hero-bg-graphic"></div>
+        <div class="section-container hero-grid">
+            <div class="hero-content">
+                <span class="hero-tagline">Clinical Botanical Alchemy</span>
+                <h1 class="hero-title">Honoring Your Skin's Natural Intelligence</h1>
+                <p class="hero-description">Radically clean, bioactive formulations mapped deliberately to synchronize seamlessly with your skin cell lineage, uncovering timeless illumination.</p>
+                <div class="hero-btn-group">
+                    <a href="#catalog" class="btn btn-primary">Explore Catalog</a>
+                    <a href="#quiz" class="btn btn-outline">Take Skin Profile Quiz</a>
                 </div>
-                <div class="hero-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?q=80&w=800&auto=format&fit=crop" alt="Minimalist Skincare Layout" class="hero-bg-img">
-                    <div class="hero-floating-card">
-                        <i class="fa-solid fa-droplet"></i>
-                        <h4>Pure Hydration</h4>
-                        <p>Clinically measured to increase cell moisture by 84% over 24 hours.</p>
+            </div>
+            <div class="hero-visual-frame">
+                <div class="hero-img-wrapper">
+                    <div class="hero-img-placeholder">Pure Radiance.</div>
+                </div>
+                <div class="hero-badge-floating">
+                    <div class="badge-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="badge-text-main">100% Certified Organic</span>
+                        <span class="badge-text-sub">Bio-extracted active agents</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BRAND VALUES -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon-box"><i class="fa-solid fa-leaf"></i></div>
-                    <h3>Vegan & Clean</h3>
-                    <p>Free of parabens, synthetic fragrances, and filler chemical compounds.</p>
+    <!-- ==========================================================================
+       BRAND CORE VALUES & BENEFITS SECTION
+       ========================================================================== -->
+    <section class="benefits-section">
+        <div class="section-container benefits-inner-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon-box"><i class="fa-solid fa-flask"></i></div>
-                    <h3>Science Backed</h3>
-                    <p>Formulated alongside world-leading botanists and cosmetic bio-chemists.</p>
+                <h3 class="benefit-title">Scientific Formulation</h3>
+                <p class="benefit-desc">Rigorous laboratory trials validate every concentrated biological compound.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z"></path></svg>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon-box"><i class="fa-solid fa-earth-americas"></i></div>
-                    <h3>Zero Waste Goal</h3>
-                    <p>Packaged responsibly in infinitely recyclable amber glass containers.</p>
+                <h3 class="benefit-title">Dermal Translucency</h3>
+                <p class="benefit-desc">Engineered to systematically illuminate uneven, dull tones from deep within.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon-box"><i class="fa-solid fa-heart"></i></div>
-                    <h3>Cruelty-Free Always</h3>
-                    <p>Certified organic alternatives verified entirely without animal testing.</p>
+                <h3 class="benefit-title">Cruelty Free Certified</h3>
+                <p class="benefit-desc">Ethically harvested ingredients without ever interacting with animal testing.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon-wrapper">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
+                <h3 class="benefit-title">Eco Guard Integrity</h3>
+                <p class="benefit-desc">100% post-consumer recycled glass vessels and clean shipping metrics.</p>
             </div>
         </div>
     </section>
 
-    <!-- MAIN PRODUCT CATALOG SECTION -->
-    <section class="section-padding" id="catalog" style="background-color: var(--bg-white);">
-        <div class="container">
-            <div class="section-header">
-                <h2>The Skincare Collective</h2>
-                <p>Meticulously cataloged systems engineered to rebalance, refine, and illuminate specific pathways of dermal health.</p>
-            </div>
-
-            <!-- Filter Controls -->
-            <div class="catalog-filter-bar">
-                <button class="filter-btn active" data-filter="all">All Formulas</button>
-                <button class="filter-btn" data-filter="cleanser">Cleansers</button>
-                <button class="filter-btn" data-filter="serum">Serums</button>
-                <button class="filter-btn" data-filter="moisturizer">Moisturizers</button>
-                <button class="filter-btn" data-filter="treatment">Treatments</button>
-            </div>
-
-            <!-- Search and Sorting Dashboard -->
-            <div class="search-sort-wrapper">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="catalog-search" placeholder="Search our remedies...">
-                </div>
-                <div class="sort-box">
-                    <select id="catalog-sort">
-                        <option value="default">Default Arrangement</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                        <option value="rating">Top Rated Only</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Live Rendered Product Grid -->
-            <div class="product-grid" id="catalog-grid">
-                <!-- Products dynamically injected via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- BRAND STORY BANNER -->
-    <section class="story-banner" id="story">
-        <div class="story-grid">
-            <div class="story-image">
-                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Natural Treatment Application">
-            </div>
-            <div class="story-content">
-                <h2>Crafted to Honor Your Natural Complexion</h2>
-                <p>Founded on the simple principle that modern skincare forces structural dependencies on artificial fillers, AURA aims to recalibrate your relationship with your skin. We sustainably harvest high-alpine herbs, cold-press nutrient-rich seeds, and leverage advanced biotechnology to build clean products that support your biology's innate ability to repair itself.</p>
-                <a href="#catalog" class="btn btn-outline" style="border-color:white; color:white;">See Active Botanicals</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CLIENT TESTIMONIALS -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2>Real Skin Transformations</h2>
-                <p>Read authentic reflections from individuals who integrated our nutrient-dense rituals into their schedules.</p>
+    <!-- ==========================================================================
+       INTERACTIVE SKIN PROFILE QUIZ CONTROLLER
+       ========================================================================== -->
+    <section class="quiz-section" id="quiz">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Aura Diagnostic Tech</span>
+                <h2 class="section-title">Discover Your Routine Alignment</h2>
             </div>
             
-            <div class="testimonials-container">
-                <div class="testimonial-slide active" data-index="0">
-                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-                    <p class="testimonial-text">"The Lucid Serum completely overhauled my texture within three weeks. Those stubborn dry patches around my cheeks disappeared completely. It feels clean, weightless, and purely biological."</p>
-                    <div class="user-info">
-                        <h4>Elena Rostova</h4>
-                        <p>Verified Customer — Verified Buyer</p>
+            <div class="quiz-card-container">
+                <div class="quiz-progress-bar-wrapper">
+                    <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="quiz-step-pane active" data-step="1">
+                    <h3 class="quiz-question-text">How does your skin feel middle of the day?</h3>
+                    <div class="quiz-options-vertical-stack">
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Oily')">Tight, dry, or displaying flaky textures <span>➔</span></div>
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Dry')">Noticeable slick shine or breakthrough oil production <span>➔</span></div>
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Combination')">Imbalanced, oily in the specific T-zone corridor <span>➔</span></div>
+                    </div>
+                    <div class="quiz-nav-footer-row">
+                        <span></span>
+                        <button class="btn btn-outline" onclick="advanceQuizStep(1)">Next Step</button>
                     </div>
                 </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step-pane" data-step="2">
+                    <h3 class="quiz-question-text">What is your paramount clinical goal?</h3>
+                    <div class="quiz-options-vertical-stack">
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Brightening')">Calming hypersensitivity and localized redness <span>➔</span></div>
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Hydration')">Softening fine lines and stimulating cellular elasticity <span>➔</span></div>
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Acne')">Purging structural blemishes and surface congestion <span>➔</span></div>
+                    </div>
+                    <div class="quiz-nav-footer-row">
+                        <button class="btn btn-outline" onclick="reverseQuizStep(2)">Back</button>
+                        <button class="btn btn-outline" onclick="advanceQuizStep(2)">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="quiz-step-pane" data-step="3">
+                    <h3 class="quiz-question-text">Select your current environmental exposure:</h3>
+                    <div class="quiz-options-vertical-stack">
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Urban')">Dense city pollution, air conditioning, daily screen radiation <span>➔</span></div>
+                        <div class="quiz-option-pill" onclick="selectQuizOption(this, 'Rural')">Extreme dry cold or persistent intense UV indices <span>➔</span></div>
+                    </div>
+                    <div class="quiz-nav-footer-row">
+                        <button class="btn btn-outline" onclick="reverseQuizStep(3)">Back</button>
+                        <button class="btn btn-primary" onclick="computeQuizResults()">Calculate Synthesis</button>
+                    </div>
+                </div>
+
+                <!-- Results Output Frame -->
+                <div class="quiz-result-payload" id="quizResultPanel">
+                    <h3 class="quiz-question-text" style="color: var(--cls-success)">Diagnostic Synthesis Complete</h3>
+                    <p id="quizResultTextNarrative" style="margin-bottom: 20px; font-size: 1.1rem;"></p>
+                    <div class="quiz-reco-product-link-box">
+                        <p style="font-weight:700; text-transform:uppercase; font-size:0.8rem; letter-spacing:1px; margin-bottom:5px;">Highly Recommended Match:</p>
+                        <h4 id="quizRecommendedProductName" style="font-size:1.4rem; margin-bottom:15px;">Aura Serum Blueprint</h4>
+                        <a href="#catalog" class="btn btn-primary" onclick="closeQuizAndScrollToCatalog()">Acquire Recommended Product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       DYNAMIC PRODUCT CATALOG (FILTERS & GRID ELEMENTS)
+       ========================================================================== -->
+    <section class="section-container" id="catalog">
+        <div class="section-title-wrapper">
+            <span class="section-subtitle">Curated Ritual Kits</span>
+            <h2 class="section-title">The Complete Botanical Catalog</h2>
+        </div>
+
+        <div class="catalog-filter-controls-row">
+            <div class="filter-tags-group">
+                <button class="filter-chip active" onclick="filterCatalogCategory('all', this)">All Formulation Matrix</button>
+                <button class="filter-chip" onclick="filterCatalogCategory('Cleanser', this)">Cleansers</button>
+                <button class="filter-chip" onclick="filterCatalogCategory('Serum', this)">Active Serums</button>
+                <button class="filter-chip" onclick="filterCatalogCategory('Moisturizer', this)">Moisturizers</button>
+                <button class="filter-chip" onclick="filterCatalogCategory('Mask', this)">Treatment Masks</button>
+            </div>
+            <div class="search-input-field-wrapper">
+                <input type="text" class="search-box-element" id="catalogSearchBox" placeholder="Search catalog items..." oninput="handleCatalogSearch()">
+                <div class="search-icon-embedded">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-responsive" id="catalogProductsTargetGrid">
+            <!-- Product Cards Populated Programmatically by JS Logic Loop -->
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       EDITORIAL RITUALS SECTION
+       ========================================================================== -->
+    <section class="rituals-section" id="rituals">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Dermal Musings</span>
+                <h2 class="section-title">The Ritual Chronicles</h2>
+            </div>
+            
+            <div class="editorial-magazine-grid">
+                <article class="editorial-article-card">
+                    <div class="article-media-container">
+                        <div class="article-media-placeholder">Chronicle 01</div>
+                    </div>
+                    <span class="article-date">October 14, 2026</span>
+                    <h3 class="article-heading">Decoupling Inflammation: The Lipid Barrier Guide</h3>
+                    <p class="article-excerpt">Deconstruct the mechanics of trans-epidermal moisture depletion and learn how specialized lipids preserve biome cellular homeostasis.</p>
+                    <a href="#" class="article-read-more-link">Read Chapter ➔</a>
+                </article>
+
+                <article class="editorial-article-card">
+                    <div class="article-media-container">
+                        <div class="article-media-placeholder">Chronicle 02</div>
+                    </div>
+                    <span class="article-date">November 02, 2026</span>
+                    <h3 class="article-heading">The Alchemical Symphony of Vitamin C & Ferulic Acid</h3>
+                    <p class="article-excerpt">Unpack why pairing pure ascorbic polymers alongside plant-derived radical scavengers safely multiplies photoprotective efficacy thresholds.</p>
+                    <a href="#" class="article-read-more-link">Read Chapter ➔</a>
+                </article>
+
+                <article class="editorial-article-card">
+                    <div class="article-media-container">
+                        <div class="article-media-placeholder">Chronicle 03</div>
+                    </div>
+                    <span class="article-date">December 19, 2026</span>
+                    <h3 class="article-heading">Circadian Rhythms and Twilight Cell Proliferation</h3>
+                    <p class="article-excerpt">Deep molecular insights into optimization vectors for nighttime retinoid application windows during active human metabolic restorative intervals.</p>
+                    <a href="#" class="article-read-more-link">Read Chapter ➔</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       REAL CLIENT TESTIMONIALS SLIDER UI
+       ========================================================================== -->
+    <section class="testimonials-section">
+        <button class="carousel-arrow-btn carousel-arrow-left" onclick="shiftTestimonialSlide(-1)" aria-label="Previous Slide">◀</button>
+        <button class="carousel-arrow-btn carousel-arrow-right" onclick="shiftTestimonialSlide(1)" aria-label="Next Slide">▶</button>
+        
+        <div class="section-container testimonial-carousel-viewport">
+            <div class="testimonial-track-container" id="testimonialSliderTrack">
+                <div class="testimonial-slide-unit">
+                    <p class="testimonial-quote-body">"The Bakuchiol Infusion completely rebuilt my cellular texture parameters within precisely three cycles. Aura treats skincare like absolute high art."</p>
+                    <div class="testimonial-client-avatar-row">
+                        <div class="avatar-circle-mock">EA</div>
+                        <div class="client-info-block">
+                            <h4 class="client-profile-name">Elena Rostova</h4>
+                            <span class="client-profile-status">Verified Collector — London</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide-unit">
+                    <p class="testimonial-quote-body">"I shifted entire clinical regimens over to the Ocean Algae Hydration Matrix. Translucent illumination levels surpassed every expectation."</p>
+                    <div class="testimonial-client-avatar-row">
+                        <div class="avatar-circle-mock">MK</div>
+                        <div class="client-info-block">
+                            <h4 class="client-profile-name">Marcus Kaelen</h4>
+                            <span class="client-profile-status">Verified Collector — Zurich</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide-unit">
+                    <p class="testimonial-quote-body">"Aura's structural transparency regarding molecular percentages set a new industry standard. My hypersensitivity has completely neutralized."</p>
+                    <div class="testimonial-client-avatar-row">
+                        <div class="avatar-circle-mock">SH</div>
+                        <div class="client-info-block">
+                            <h4 class="client-profile-name">Sasha Harrison</h4>
+                            <span class="client-profile-status">Verified Collector — Tokyo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       FREQUENTLY ASKED QUESTIONS ACCORDION
+       ========================================================================== -->
+    <section class="faq-section" id="faq">
+        <div class="section-container">
+            <div class="section-title-wrapper">
+                <span class="section-subtitle">Clinical Protocols</span>
+                <h2 class="section-title">Frequently Handled Enquiries</h2>
+            </div>
+
+            <div class="faq-accordion-container">
+                <div class="faq-item-node">
+                    <button class="faq-trigger-header" onclick="toggleFaqAccordionNode(this)">
+                        <h3 class="faq-question-heading">Are these active compounds completely safe for high reactive rosacea skin profiles?</h3>
+                        <span class="faq-icon-indicator">▼</span>
+                    </button>
+                    <div class="faq-collapsible-panel">
+                        <p class="faq-answer-paragraph">Absolutely. Every extraction tier undergoes hyper-deliberate patch screening protocols. We systematically isolate botanical agents to guarantee absolute zero presence of classic irritants, fragrances, or aggressive essential oil variants.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-node">
+                    <button class="faq-trigger-header" onclick="toggleFaqAccordionNode(this)">
+                        <h3 class="faq-question-heading">How does the molecular delivery technology ensure deep layer penetration?</h3>
+                        <span class="faq-icon-indicator">▼</span>
+                    </button>
+                    <div class="faq-collapsible-panel">
+                        <p class="faq-answer-paragraph">Our formulas utilize clean liposomal encapsulation matrices. This envelopes water-soluble actives inside biocompatible lipids, allowing compounds to slide past surface tension zones before payload disintegration occurs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-node">
+                    <button class="faq-trigger-header" onclick="toggleFaqAccordionNode(this)">
+                        <h3 class="faq-question-heading">What is the optimal preservation storage framework for maintaining bioactive potency?</h3>
+                        <span class="faq-icon-indicator">▼</span>
+                    </button>
+                    <div class="faq-collapsible-panel">
+                        <p class="faq-answer-paragraph">Aura utilizes premium ultraviolet-filtering glass vessels. To optimize lifespan parameters, keep bottles shielded from direct daytime sun cycles and securely tightened to block ambient humidity exposure.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-node">
+                    <button class="faq-trigger-header" onclick="toggleFaqAccordionNode(this)">
+                        <h3 class="faq-question-heading">Are checkout procedures backed by global standard cryptography frameworks?</h3>
+                        <span class="faq-icon-indicator">▼</span>
+                    </button>
+                    <div class="faq-collapsible-panel">
+                        <p class="faq-answer-paragraph">Yes, all point-of-sale operational logic processing securely channels through end-to-end tokenized 256-bit secure layer protocols completely isolated from permanent data storage pools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       CONTACT RITUAL & FORM BLOCK
+       ========================================================================== -->
+    <section class="contact-section" id="contact">
+        <div class="section-container contact-split-grid">
+            <div class="contact-info-column">
+                <span class="section-subtitle">Aura Concierge Desk</span>
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">Let Us Map Your Dermal Ritual Alignment</h2>
+                <p class="cls-text-muted">Reach out directly to access certified consultations or clarify shipping logs. Our dedicated botanical advisory network responds inside a 12-hour global window.</p>
                 
-                <div class="testimonial-slide" data-index="1">
-                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-                    <p class="testimonial-text">"Switching to the Ocean Cream restored elasticity I thought I lost years ago. My skin isn't just oily or greasy after applying; it genuinely looks plumped and thoroughly alive."</p>
-                    <div class="user-info">
-                        <h4>Marcus Vance</h4>
-                        <p>Verified Customer — Lifestyle Consultant</p>
+                <div class="contact-methods-stack">
+                    <div class="contact-method-node">
+                        <div class="contact-method-icon-box flex-center">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <div class="contact-method-details">
+                            <h4>Atelier Headquarters</h4>
+                            <p>742 Botanical Way, Suite 400, Kyoto, Japan</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="testimonial-slide" data-index="2">
-                    <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-                    <p class="testimonial-text">"The Refining Clay Mask pulled out deep micro-impurities without forcing any reactive inflammation. My rosacea-prone skin felt incredibly settled afterward."</p>
-                    <div class="user-info">
-                        <h4>Sophia Lin</h4>
-                        <p>Verified Customer — Creative Designer</p>
-                    </div>
-                </div>
-
-                <div class="slider-controls">
-                    <button class="slider-dot active" data-slide="0" aria-label="Go to slide 1"></button>
-                    <button class="slider-dot" data-slide="1" aria-label="Go to slide 2"></button>
-                    <button class="slider-dot" data-slide="2" aria-label="Go to slide 3"></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ACCORDION FAQ SECTION -->
-    <section class="section-padding" id="faq" style="background-color: var(--bg-white); border-top: 1px solid var(--border-color);">
-        <div class="container">
-            <div class="section-header">
-                <h2>Answering Your Curiosities</h2>
-                <p>Essential transparency concerning ingredient safety timelines, shipping, and formulation methodologies.</p>
-            </div>
-
-            <div class="faq-wrapper">
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <h3>Are these formulations structurally stable without synthetic parabens?</h3>
-                        <i class="fa-solid fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-body">
-                        <p>Yes, absolutely. We leverage standard-compliant plant-derived organic preservation matrices such as Radish Root Ferment Filtrate and Honeysuckle Extract. These guarantee structural product stability up to 12 months after breaking the bottle vacuum seal.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <h3>How long does it take to visually detect structural skin variations?</h3>
-                        <i class="fa-solid fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-body">
-                        <p>Dermal cellular turnover spans roughly 28 days. While deep cellular moisture increases inside 2 hours, expect marked superficial shifts in hyperpigmentation, collagen visibility, and elasticity within 4 to 6 weeks of regimented daily application.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <h3>Can I safely layer your high-potency Vitamin C with retinol?</h3>
-                        <i class="fa-solid fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-body">
-                        <p>We highly suggest separating these items. Apply our Vitamin C serum in your daytime routine to maximize environmental oxidation shield performance, and reserve heavy retinoid correctors exclusively for nighttime cellular repair periods to mitigate surface pH conflicts.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <h3>Is your glass packaging sustainably sourced globally?</h3>
-                        <i class="fa-solid fa-chevron-down faq-icon"></i>
-                    </div>
-                    <div class="faq-body">
-                        <p>100% of our production bottles utilize pure pharmaceutical-grade amber glass produced from 70% locally reclaimed cullet materials. This heavily diminishes logistical emission overhead and shields sensitive botanical ingredients from direct UV degradation.</p>
+                    <div class="contact-method-node">
+                        <div class="contact-method-icon-box flex-center">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="contact-method-details">
+                            <h4>Electronic Correspondence</h4>
+                            <p>concierge@aura-botanicals.domain</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- NEWSLETTER OPT-IN SECTION -->
-    <section class="section-padding newsletter">
-        <div class="container">
-            <div class="newsletter-box">
-                <h2>Join The Aura Circle</h2>
-                <p>Receive priority access to seasonal batch reserves, editorial skin education articles, and customized skincare protocols.</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Aura.');">
-                    <input type="email" placeholder="Enter your email address" required aria-label="Email Input Field">
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
+            <div class="contact-form-card">
+                <form id="contactRitualForm" onsubmit="handleFormSubmission(event)">
+                    <div class="form-input-group">
+                        <label for="contactName">Your Identity Name</label>
+                        <input type="text" id="contactName" class="form-text-input" placeholder="e.g. Adrienne Vance" required>
+                    </div>
+                    <div class="form-input-group">
+                        <label for="contactEmail">Secure Email Channel</label>
+                        <input type="email" id="contactEmail" class="form-text-input" placeholder="e.g. adrienne@domain.com" required>
+                    </div>
+                    <div class="form-input-group">
+                        <label for="contactMessage">Enquiry Core Message</label>
+                        <textarea id="contactMessage" class="form-textarea-input" rows="5" placeholder="Detail your profile skin nuances or specific tracking code..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Transmit Message</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- DYNAMIC INTERACTIVE CART SIDE-DRAWER -->
-    <div class="cart-drawer-overlay" id="cart-overlay">
-        <div class="cart-drawer">
-            <div class="cart-header">
-                <h3>Your Ritual Basket</h3>
-                <button class="close-cart" id="close-cart-btn" aria-label="Close Shopping Cart Drawer"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="cart-items-body" id="cart-items-container">
-                <!-- Cart items will appear here via JS rendering -->
-            </div>
-            <div class="cart-footer">
-                <div class="cart-subtotal">
-                    <span>Estimated Subtotal</span>
-                    <span id="cart-subtotal-val">$0.00</span>
+    <!-- ==========================================================================
+       NEWSLETTER SUBSCRIPTION BAR
+       ========================================================================== -->
+    <section class="section-container newsletter-bar-section">
+        <h2>Join The Inner Circle Cohort</h2>
+        <p>Subscribe to secure early access notifications regarding drop schedules, formulation releases, and micro-batch seasonal availability maps.</p>
+        <div class="newsletter-form-inline-control">
+            <input type="email" class="newsletter-inline-input" placeholder="Provide your active email portal..." id="newsletterEmailInput">
+            <button class="btn btn-primary" onclick="handleNewsletterSubscription()">Secure Access</button>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SHOPPING CART SIDEBAR DRAWER
+       ========================================================================== -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="closeShoppingCartDrawer()">
+        <div class="cart-drawer-panel" onclick="event.stopPropagation()">
+            <div class="cart-panel-header">
+                <h3>Selected Items Matrix</h3>
+                <div class="cart-close-trigger" onclick="closeShoppingCartDrawer()">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg>
                 </div>
-                <button class="btn btn-primary" onclick="alert('Proceeding directly to structural checkout pipeline simulation...')">Proceed To Checkout</button>
+            </div>
+
+            <div class="cart-items-scroll-frame" id="cartItemsListContainer">
+                <!-- Cart Items generated dynamically by JS engine -->
+            </div>
+
+            <div class="cart-panel-footer-summary">
+                <div class="summary-row-financial">
+                    <span>Subtotal Valuation</span>
+                    <span id="cartSubtotalValueDisplay">$0.00</span>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="executeCheckoutSequence()">Initiate Secure Checkout</button>
             </div>
         </div>
     </div>
 
-    <!-- QUICK-VIEW PRODUCT MODAL WINDOW -->
-    <div class="modal-overlay" id="product-modal">
-        <div class="modal-window">
-            <button class="close-modal" id="close-modal-btn" aria-label="Dismiss Modal Interface"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-grid" id="modal-dynamic-target">
-                <!-- Content generated on click via product manifest reference -->
+    <!-- ==========================================================================
+       MASTER PRODUCT QUICK VIEW MODAL
+       ========================================================================== -->
+    <div class="modal-view-overlay" id="productQuickViewModal" onclick="closeProductQuickViewModal()">
+        <div class="modal-content-stage-box" onclick="event.stopPropagation()">
+            <div class="modal-close-corner-btn" onclick="closeProductQuickViewModal()">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+            </div>
+            <div class="modal-split-layout-grid">
+                <div class="modal-media-viewport">
+                    <div class="product-card-img-placeholder" id="modalProductImageText">Modal Product Visual</div>
+                </div>
+                <div class="modal-detail-narrative-panel">
+                    <span class="product-category-label" id="modalProductCategory">Category Label</span>
+                    <h3 class="modal-product-title" id="modalProductName">Product Title Placeholder</h3>
+                    <div class="modal-product-price" id="modalProductPrice">$00.00</div>
+                    <p class="modal-product-desc" id="modalProductDescription">Extended deep-dive analysis regarding botanical compound matrices inside this precise clinical formula formulation asset framework text.</p>
+                    <button class="btn btn-primary" id="modalAddToCartActionBtn">Add To Active Cart</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER LINK GRID STRUCTURE -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>AURA</h3>
-                    <p>Honoring modern human biology through targeted application of pure organic concentrates. Consciously engineered, globally appreciated.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Instagram Profile Link"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" aria-label="Pinterest Profile Link"><i class="fa-brands fa-pinterest"></i></a>
-                        <a href="#" aria-label="TikTok Profile Link"><i class="fa-brands fa-tiktok"></i></a>
+    <!-- ==========================================================================
+       CORPORATE BRAND FOOTER UTILITIES
+       ========================================================================== -->
+    <footer class="master-footer-node">
+        <div class="section-container">
+            <div class="footer-columns-wrapper-grid">
+                <div class="footer-brand-column">
+                    <a href="#" class="brand-logo">AURA</a>
+                    <p>Constructing high-potency skin rituals backed completely by rigorous independent botanical testing standards.</p>
+                </div>
+                <div>
+                    <h4 class="footer-header-label">Collection Index</h4>
+                    <div class="footer-links-list-stack">
+                        <a href="#catalog">All Formulations</a>
+                        <a href="#catalog">Purifying Cleansers</a>
+                        <a href="#catalog">Hydration Serums</a>
+                        <a href="#catalog">Intense Moisturizers</a>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h4>The Collection</h4>
-                    <ul>
-                        <li><a href="#catalog">All Formulations</a></li>
-                        <li><a href="#catalog">Gentle Cleansers</a></li>
-                        <li><a href="#catalog">Targeted Serums</a></li>
-                        <li><a href="#catalog">Daily Hydration</a></li>
-                    </ul>
+                <div>
+                    <h4 class="footer-header-label">Atelier Resources</h4>
+                    <div class="footer-links-list-stack">
+                        <a href="#quiz">Skin Diagnostics</a>
+                        <a href="#rituals">Chronicles Journal</a>
+                        <a href="#faq">FAQ Matrix</a>
+                        <a href="#contact">Concierge Channel</a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h4>Company Ethical</h4>
-                    <ul>
-                        <li><a href="#story">Sourcing Standards</a></li>
-                        <li><a href="#story">Sustainability Impact</a></li>
-                        <li><a href="#">Scientific Advisors</a></li>
-                        <li><a href="#">Career Pathways</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Support Center</h4>
-                    <p><i class="fa-solid fa-envelope"></i> care@aurabotanicals.com</p>
-                    <p><i class="fa-solid fa-phone"></i> +1 (800) 412-AURA</p>
-                    <p><i class="fa-solid fa-location-dot"></i> 742 Coastal Ridge Blvd, Malibu, CA</p>
+                <div>
+                    <h4 class="footer-header-label">Legal Mandates</h4>
+                    <div class="footer-links-list-stack">
+                        <a href="#">Privacy Framework</a>
+                        <a href="#">Terms of Protocol</a>
+                        <a href="#">Sourcing Compliance</a>
+                        <a href="#">Sustain Metrics</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 AURA Botanicals Inc. All Rights Reserved.</p>
-                <p>Designed with meticulous clarity and structured semantic code layout.</p>
+
+            <div class="footer-bottom-baseline">
+                <p>&copy; 2026 AURA Laboratories Inc. All dimensions protected globally.</p>
+                <p>Designed with absolute clean botanical aesthetic integrity.</p>
             </div>
         </div>
     </footer>
 
-    <!-- --- JAVASCRIPT OBJECT APPLICATION ENGINE --- -->
+    <!-- ==========================================================================
+       MASTER JAVASCRIPT SYSTEM ENGINE CONTROLLER
+       ========================================================================== -->
     <script>
-        /* --- 1. THE ESSENTIAL CATALOG DATA MANIFEST --- */
-        const PRODUCTS_DATABASE = [
-            {
-                id: "aura-01",
-                title: "Bakuchiol Infused Lucid Serum",
-                category: "serum",
-                price: 68.00,
-                rating: 4.9,
-                reviews: 142,
-                badge: "Best Seller",
-                image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=600&auto=format&fit=crop",
-                desc: "An advanced botanical alternative to conventional retinol. Visibly restructures sagging dermal cell contours, erases microscopic expression creases, and improves cellular clarity without inducing traditional redness or flaky scaling reactions."
-            },
-            {
-                id: "aura-02",
-                title: "Deep Ocean Sea Kelp Cream",
-                category: "moisturizer",
-                price: 54.00,
-                rating: 4.8,
-                reviews: 98,
-                badge: "New Release",
-                image: "https://images.unsplash.com/photo-1619451334792-150fd785ee74?q=80&w=600&auto=format&fit=crop",
-                desc: "Rich, velvety structural lipid replacement cream. Harnesses deep sea bladderwrack extracts alongside clean bio-fermented hyaluronic acid chains to reinforce damaged barrier systems against cold climates and dry microenvironments."
-            },
-            {
-                id: "aura-03",
-                title: "Calendula Root Soothing Cleanser",
-                category: "cleanser",
-                price: 36.00,
-                rating: 4.7,
-                reviews: 215,
-                badge: "",
-                image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=600&auto=format&fit=crop",
-                desc: "A non-foaming emulsion designed to gently dislodge lipid-bound soot, makeup pigments, and industrial particles without extracting necessary squalene components from the delicate outer epidermis layers."
-            },
-            {
-                id: "aura-04",
-                title: "Volcanic Ash Pore Refining Treatment",
-                category: "treatment",
-                price: 48.00,
-                rating: 4.6,
-                reviews: 73,
-                badge: "Limited Batch",
-                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600&auto=format&fit=crop",
-                desc: "Harnesses bioactive micronized volcanic silt alongside white willow bark acids to systematically clarify congested hair follicles, regulating sebum output pipelines while evening skin tone imbalances."
-            },
-            {
-                id: "aura-05",
-                title: "Squalane Peptide Hydration Mist",
-                category: "moisturizer",
-                price: 42.00,
-                rating: 4.9,
-                reviews: 188,
-                badge: "Award Winner",
-                image: "https://images.unsplash.com/photo-1608248597481-496100c8c836?q=80&w=600&auto=format&fit=crop",
-                desc: "A high-frequency cellular mist carrying sugarcane-derived squalane and specialized signal peptides. Delivers instant dewiness and acts as a transdermal primer for subsequently layered oils."
-            },
-            {
-                id: "aura-06",
-                title: "Kakadu Plum Vitamin C Concentrate",
-                category: "serum",
-                price: 72.00,
-                rating: 4.8,
-                reviews: 112,
-                badge: "Highly Rated",
-                image: "https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop",
-                desc: "Potent 15% stable L-ascorbic acid equivalent sourced naturally from organic Australian Kakadu plums. Defends skin from free-radical solar damage, breaks up dark spots, and unifies patchy undertones."
-            },
-            {
-                id: "aura-07",
-                title: "Algae Enzyme Resurfacing Peel",
-                category: "treatment",
-                price: 58.00,
-                rating: 4.5,
-                reviews: 54,
-                badge: "",
-                image: "https://images.unsplash.com/photo-1601049676099-e7ed07d825b0?q=80&w=600&auto=format&fit=crop",
-                desc: "Gently breaks apart dead surface proteins using live pumpkin and marine algae enzymes. Instantly exposes fresh, luminous skin without requiring aggressive synthetic acid peeling agents."
-            },
-            {
-                id: "aura-08",
-                title: "Ceramide Barrier Protective Balm",
-                category: "moisturizer",
-                price: 62.00,
-                rating: 4.9,
-                reviews: 160,
-                badge: "Crucial Care",
-                image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?q=80&w=600&auto=format&fit=crop",
-                desc: "An intensive night treatment containing a balanced blend of ceramides, pure cholesterol, and fatty acids. Designed to rebuild dry skin and repair raw barriers caused by over-exfoliation."
-            }
+        /* ==========================================================================
+           1. COMPREHENSIVE STATIC PRODUCT DATASET
+           ========================================================================== */
+        const PRODUCTS_DATASET = [
+            { id: 1, name: "Squalane Blossom Cleanser", category: "Cleanser", price: 42.00, tag: "Best Seller", rating: 4.8, reviews: 124, desc: "A pure, non-stripping milky cleanser charged with multi-weight plant lipids to dissolve heavy urban grime while perfectly sustaining critical acid mantle moisture balance markers." },
+            { id: 2, name: "Bakuchiol Cellular Infusion", category: "Serum", price: 88.00, tag: "High Potency", rating: 4.9, reviews: 92, desc: "A complex 2% botanical retinol alternative matrix structured to accelerate epidermal cell turnover pathways without inducing standard inflammatory redness loops." },
+            { id: 3, name: "Ocean Algae Hydration Matrix", category: "Moisturizer", price: 64.00, tag: "New Release", rating: 4.7, reviews: 48, desc: "A featherlight gel-cream rich in concentrated deep-sea kelp polymers designed to cast a micro-breathable moisture net over depleted skin envelopes." },
+            { id: 4, name: "Ceramide Restorative Balm", category: "Moisturizer", price: 72.00, tag: "Rich Cream", rating: 5.0, reviews: 215, desc: "An intensive lipid-replenishing lipid shield compound containing three essential plant-derived ceramides to rescue severely compromised environmental barriers." },
+            { id: 5, name: "Resveratrol Twilight Treatment Mask", category: "Mask", price: 58.00, tag: "Overnight", rating: 4.6, reviews: 67, desc: "An overnight cream-gel supercharged with pure vine-extracted antioxidants to aggressively sweep cellular waste products during restorative dream cycles." },
+            { id: 6, name: "Salicylic Willowbark Purge Liquid", category: "Cleanser", price: 38.00, tag: "Active Acid", rating: 4.8, reviews: 112, desc: "A naturally derived BHA complex that slips inside follicular columns to dissolve impacted keratin matrix plugs and minimize enlarged pore structures." },
+            { id: 7, name: "Prickly Pear Illuminating Nectar", category: "Serum", price: 95.00, tag: "Prestige Oil", rating: 4.9, reviews: 83, desc: "An exceptionally rare cold-pressed single-origin seed nectar rich in natural tocopherols to restore translucent light reflection matrices." },
+            { id: 8, name: "White Tea Protection Fluid SPF30", category: "Moisturizer", price: 46.00, tag: "Daily Shield", rating: 4.5, reviews: 156, desc: "A broad-spectrum zinc oxide mineral blocker paired alongside high-altitude white tea isolates to neutralize solar radiation stresses." },
+            { id: 9, name: "Matcha Detoxifying Clay Compote", category: "Mask", price: 52.00, tag: "Weekly Ritual", rating: 4.7, reviews: 79, desc: "Ceremonial-grade green tea dust whipped into pure volcanic kaolin minerals to instantly pull heavy metallic pollution residues out of surface lines." },
+            { id: 10, name: "Hyaluronic Rosewater Plump Mist", category: "Serum", price: 34.00, tag: "Instant Mist", rating: 4.6, reviews: 198, desc: "Pure steam-distilled damask rose hydrosols combined with multi-stage sodium hyaluronate molecules for absolute mid-day moisture reinforcement loops." },
+            { id: 11, name: "Niacinamide Zinc Balance Complex", category: "Serum", price: 62.00, tag: "Stabilizer", rating: 4.8, reviews: 243, desc: "A ultra-clean 10% niacinamide isolate formulation designed specifically to balance chaotic sebum distribution nodes and calm hyperpigmentation spots." },
+            { id: 12, name: "CoQ10 Elemental Contour Cream", category: "Moisturizer", price: 78.00, tag: "Sculpting", rating: 4.9, reviews: 54, desc: "A dense, rich cell-energizing compound built to strengthen delicate facial perimeter lines against structural gravity drag variables over extended cycles." }
         ];
 
-        /* --- 2. GLOBAL SYSTEM STATE CONTEXT --- */
-        let USER_CART = [];
-        let ACTIVE_FILTER = "all";
-        let SEARCH_QUERY = "";
-        let SORT_METHOD = "default";
+        /* ==========================================================================
+           2. STATE STORAGE POOLS
+           ========================================================================== */
+        let SHOPPING_CART = [];
+        let CURRENT_FILTER_CATEGORY = "all";
+        let CURRENT_SEARCH_STRING = "";
+        let SELECTED_QUIZ_RESPONSES = {};
 
-        /* --- 3. CORE APPLICATION INITIALIZATION PIPELINE --- */
+        /* ==========================================================================
+           3. APPLICATION INITIALIZATION & CORE EVENTS
+           ========================================================================== */
         document.addEventListener("DOMContentLoaded", () => {
-            renderCatalogGrid();
-            initHeaderTracking();
-            initMobileNavigation();
-            initCatalogFilters();
-            initSearchAndSort();
-            initDrawerActionListeners();
-            initTestimonialEngine();
-            initAccordionFaqEngine();
+            renderCatalogGridElements();
+            setupHeaderScrollObserver();
+            setupMobileMenuLogic();
         });
 
-        /* --- 4. DATA RENDERING CONTROLLERS --- */
-        function renderCatalogGrid() {
-            const gridTarget = document.getElementById("catalog-grid");
-            gridTarget.innerHTML = ""; // Clear current view
+        function setupHeaderScrollObserver() {
+            const header = document.getElementById("siteHeader");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    header.classList.add("header-scrolled");
+                } else {
+                    header.classList.remove("header-scrolled");
+                }
+            });
+        }
 
-            // Filter data pipeline
-            let processedList = PRODUCTS_DATABASE.filter(item => {
-                const matchesCategory = (ACTIVE_FILTER === "all" || item.category === ACTIVE_FILTER);
-                const matchesSearch = item.title.toLowerCase().includes(SEARCH_QUERY.toLowerCase()) || 
-                                      item.desc.toLowerCase().includes(SEARCH_QUERY.toLowerCase());
-                return matchesCategory && matchesSearch;
+        function setupMobileMenuLogic() {
+            const btn = document.getElementById("menuToggleBtn");
+            const menu = document.getElementById("navMenu");
+            btn.addEventListener("click", () => menu.classList.toggle("active"));
+            menu.addEventListener("click", () => menu.classList.remove("active"));
+        }
+
+        // Theme Toggle Controller
+        document.getElementById("themeToggleBtn").addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const targetTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", targetTheme);
+        });
+
+        /* ==========================================================================
+           4. CATALOG RENDERING ENGINE & INTERACTION
+           ========================================================================== */
+        function renderCatalogGridElements() {
+            const targetGrid = document.getElementById("catalogProductsTargetGrid");
+            targetGrid.innerHTML = "";
+
+            const filteredProducts = PRODUCTS_DATASET.filter(prod => {
+                const categoryMatch = CURRENT_FILTER_CATEGORY === "all" || prod.category === CURRENT_FILTER_CATEGORY;
+                const searchMatch = prod.name.toLowerCase().includes(CURRENT_SEARCH_STRING.toLowerCase()) || 
+                                    prod.desc.toLowerCase().includes(CURRENT_SEARCH_STRING.toLowerCase());
+                return categoryMatch && searchMatch;
             });
 
-            // Sort data pipeline
-            if (SORT_METHOD === "price-low") {
-                processedList.sort((a, b) => a.price - b.price);
-            } else if (SORT_METHOD === "price-high") {
-                processedList.sort((a, b) => b.price - a.price);
-            } else if (SORT_METHOD === "rating") {
-                processedList.sort((a, b) => b.rating - a.rating);
-            }
-
-            // Empty state check
-            if (processedList.length === 0) {
-                gridTarget.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--text-muted);">
-                        <i class="fa-solid fa-magnifying-glass" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.4;"></i>
-                        <p style="font-size: 1.1rem;">No specialized remedies found matching your search parameters.</p>
-                    </div>
-                `;
+            if (filteredProducts.length === 0) {
+                targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--cls-text-muted);">No formulation targets match your precise parameters.</div>`;
                 return;
             }
 
-            // Loop and render cards
-            processedList.forEach(product => {
+            filteredProducts.forEach(product => {
                 const card = document.createElement("div");
-                card.className = "product-card";
-                
-                let badgeHTML = product.badge ? `<div class="product-badge">${product.badge}</div>` : '';
-                
-                // Build interactive star graphics
-                let starsHTML = '';
-                for(let i = 1; i <= 5; i++) {
-                    starsHTML += i <= Math.floor(product.rating) ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star-half-stroke"></i>';
-                }
-
+                card.className = "product-card-frame";
                 card.innerHTML = `
-                    ${badgeHTML}
-                    <div class="product-image-container">
-                        <img src="${product.image}" alt="${product.title}" loading="lazy">
-                        <div class="product-action-overlay">
-                            <button class="action-btn qv-trigger" data-id="${product.id}" title="Quick Look Formulation"><i class="fa-solid fa-eye"></i></button>
-                            <button class="action-btn add-cart-trigger" data-id="${product.id}" title="Add Formula to Basket"><i class="fa-solid fa-bag-shopping"></i></button>
+                    <div class="product-card-thumbnail-container" onclick="openProductQuickViewModal(${product.id})">
+                        <span class="product-ribbon-tag">${product.tag}</span>
+                        <div class="product-card-img-placeholder">${product.name.split(' ').slice(0, 2).join(' ')}</div>
+                        <div class="product-action-overlay-trigger-box">
+                            <button class="quick-view-circle-btn flex-center" title="Quick Inspection View">👁</button>
                         </div>
                     </div>
-                    <div class="product-info-box">
-                        <span class="product-category">${product.category}</span>
-                        <h3 class="product-title">${product.title}</h3>
-                        <div class="product-rating">
-                            ${starsHTML} <span>(${product.reviews})</span>
+                    <div class="product-metadata-body">
+                        <span class="product-category-label">${product.category}</span>
+                        <h3 class="product-headline-title" onclick="openProductQuickViewModal(${product.id})">${product.name}</h3>
+                        <div class="product-rating-row">
+                            ${"★".repeat(Math.floor(product.rating))}${"☆".repeat(5 - Math.floor(product.rating))}
+                            <span class="rating-count-span">(${product.reviews} reviews)</span>
                         </div>
-                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <div class="product-footer-price-row">
+                            <span class="product-price-display">$${product.price.toFixed(2)}</span>
+                            <button class="add-to-cart-action-btn" onclick="addProductToShoppingCart(${product.id})">Add To Routine</button>
+                        </div>
                     </div>
                 `;
-                gridTarget.appendChild(card);
-            });
-
-            // Re-bind click event hooks to newly generated DOM components
-            bindGridActionDOMEvents();
-        }
-
-        /* --- 5. ACTION BUTTON BINDING MECHANISMS --- */
-        function bindGridActionDOMEvents() {
-            document.querySelectorAll(".qv-trigger").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    const id = e.currentTarget.getAttribute("data-id");
-                    openQuickViewModal(id);
-                });
-            });
-
-            document.querySelectorAll(".add-cart-trigger").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    const id = e.currentTarget.getAttribute("data-id");
-                    addItemToSystemCart(id);
-                });
+                targetGrid.appendChild(card);
             });
         }
 
-        /* --- 6. SHOPPING CART CORE APPLICATION LOGIC --- */
-        function addItemToSystemCart(productId) {
-            const catalogItem = PRODUCTS_DATABASE.find(p => p.id === productId);
-            if (!catalogItem) return;
+        function filterCatalogCategory(category, buttonElement) {
+            CURRENT_FILTER_CATEGORY = category;
+            document.querySelectorAll(".filter-chip").forEach(chip => chip.classList.remove("active"));
+            buttonElement.classList.add("active");
+            renderCatalogGridElements();
+        }
 
-            const existingCartItem = USER_CART.find(item => item.id === productId);
+        function handleCatalogSearch() {
+            CURRENT_SEARCH_STRING = document.getElementById("catalogSearchBox").value;
+            renderCatalogGridElements();
+        }
 
-            if (existingCartItem) {
-                existingCartItem.quantity += 1;
+        /* ==========================================================================
+           5. CART CONTROLLER ENGINE & INTERACTION
+           ========================================================================== */
+        const cartOverlay = document.getElementById("cartDrawerOverlay");
+
+        document.getElementById("cartTriggerBtn").addEventListener("click", () => cartOverlay.classList.add("active"));
+
+        function closeShoppingCartDrawer() {
+            cartOverlay.classList.remove("active");
+        }
+
+        function addProductToShoppingCart(productId) {
+            const itemMatch = PRODUCTS_DATASET.find(p => p.id === productId);
+            const cartMatch = SHOPPING_CART.find(item => item.product.id === productId);
+
+            if (cartMatch) {
+                cartMatch.quantity += 1;
             } else {
-                USER_CART.push({
-                    id: catalogItem.id,
-                    title: catalogItem.title,
-                    price: catalogItem.price,
-                    image: catalogItem.image,
-                    quantity: 1
-                });
+                SHOPPING_CART.push({ product: itemMatch, quantity: 1 });
             }
 
-            synchronizeCartInterfaceState();
-            openCartDrawerInterface();
+            syncShoppingCartState();
+            cartOverlay.classList.add("active");
         }
 
-        function adjustCartItemQuantity(productId, directionalDelta) {
-            const targetItem = USER_CART.find(item => item.id === productId);
-            if (!targetItem) return;
-
-            targetItem.quantity += directionalDelta;
-
-            if (targetItem.quantity <= 0) {
-                USER_CART = USER_CART.filter(item => item.id !== productId);
+        function adjustCartItemQuantity(productId, dynamicShift) {
+            const itemIndex = SHOPPING_CART.findIndex(item => item.product.id === productId);
+            if (itemIndex > -1) {
+                SHOPPING_CART[itemIndex].quantity += dynamicShift;
+                if (SHOPPING_CART[itemIndex].quantity <= 0) {
+                    SHOPPING_CART.splice(itemIndex, 1);
+                }
             }
-
-            synchronizeCartInterfaceState();
+            syncShoppingCartState();
         }
 
-        function removeCartItemEntirely(productId) {
-            USER_CART = USER_CART.filter(item => item.id !== productId);
-            synchronizeCartInterfaceState();
+        function clearProductFromCart(productId) {
+            SHOPPING_CART = SHOPPING_CART.filter(item => item.product.id !== productId);
+            syncShoppingCartState();
         }
 
-        function synchronizeCartInterfaceState() {
-            const container = document.getElementById("cart-items-container");
-            const globalCounter = document.getElementById("global-cart-count");
-            const subtotalLabel = document.getElementById("cart-subtotal-val");
+        function syncShoppingCartState() {
+            const listContainer = document.getElementById("cartItemsListContainer");
+            const counterDisplay = document.getElementById("cartCounterDisplay");
+            const subtotalDisplay = document.getElementById("cartSubtotalValueDisplay");
 
-            container.innerHTML = "";
+            listContainer.innerHTML = "";
+            let derivedTotalQuantity = 0;
+            let derivedFinancialSubtotal = 0;
 
-            let totalUnitsCount = 0;
-            let netSubtotalAccumulator = 0;
+            SHOPPING_CART.forEach(item => {
+                derivedTotalQuantity += item.quantity;
+                derivedFinancialSubtotal += item.product.price * item.quantity;
 
-            if (USER_CART.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-cart-msg">
-                        <i class="fa-solid fa-basket-shopping"></i>
-                        <p>Your skincare routine basket is empty.</p>
-                    </div>
-                `;
-            } else {
-                USER_CART.forEach(item => {
-                    totalUnitsCount += item.quantity;
-                    netSubtotalAccumulator += (item.price * item.quantity);
-
-                    const cartItemRow = document.createElement("div");
-                    cartItemRow.className = "cart-item";
-                    cartItemRow.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}" class="cart-item-img">
-                        <div class="cart-item-details">
-                            <h4>${item.title}</h4>
-                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                            <div class="cart-qty-control">
-                                <button onclick="adjustCartItemQuantity('${item.id}', -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button onclick="adjustCartItemQuantity('${item.id}', 1)">+</button>
-                            </div>
+                const node = document.createElement("div");
+                node.className = "cart-item-row-node";
+                node.innerHTML = `
+                    <div class="cart-item-thumbnail-placeholder">${item.product.name.substring(0,2)}</div>
+                    <div class="cart-item-details-box">
+                        <h4 class="cart-item-title-text">${item.product.name}</h4>
+                        <span class="cart-item-price-tag">$${item.product.price.toFixed(2)}</span>
+                        <div class="cart-item-qty-controls-row">
+                            <button class="qty-adjust-btn" onclick="adjustCartItemQuantity(${item.product.id}, -1)">-</button>
+                            <span class="qty-display-span">${item.quantity}</span>
+                            <button class="qty-adjust-btn" onclick="adjustCartItemQuantity(${item.product.id}, 1)">+</button>
                         </div>
-                        <button class="remove-item-btn" onclick="removeCartItemEntirely('${item.id}')" title="Drop item entirely"><i class="fa-solid fa-trash-can"></i></button>
-                    `;
-                    container.appendChild(cartItemRow);
-                });
+                    </div>
+                    <div class="cart-item-remove-trigger" onclick="clearProductFromCart(${item.product.id})" title="Remove formulation">🗑</div>
+                `;
+                listContainer.appendChild(node);
+            });
+
+            if (SHOPPING_CART.length === 0) {
+                listContainer.innerHTML = `<p style="text-align: center; color: var(--cls-text-muted); margin-top: 40px;">Your routine matrix is currently vacant.</p>`;
             }
 
-            globalCounter.innerText = totalUnitsCount;
-            subtotalLabel.innerText = `$${netSubtotalAccumulator.toFixed(2)}`;
+            counterDisplay.innerText = derivedTotalQuantity;
+            subtotalDisplay.innerText = `$${derivedFinancialSubtotal.toFixed(2)}`;
         }
 
-        /* --- 7. CART DRAWER ANIMATION HANDLERS --- */
-        function openCartDrawerInterface() {
-            document.getElementById("cart-overlay").classList.add("active");
+        function executeCheckoutSequence() {
+            if (SHOPPING_CART.length === 0) {
+                alert("Your custom active routine is completely vacant.");
+                return;
+            }
+            alert("Rerouting to 256-bit tokenized banking clearing tier frame...");
+            SHOPPING_CART = [];
+            syncShoppingCartState();
+            closeShoppingCartDrawer();
         }
 
-        function closeCartDrawerInterface() {
-            document.getElementById("cart-overlay").classList.remove("active");
-        }
+        /* ==========================================================================
+           6. QUICK VIEW OVERLAY FRAME MODULE CONTROLLER
+           ========================================================================== */
+        const modalOverlay = document.getElementById("productQuickViewModal");
 
-        function initDrawerActionListeners() {
-            document.getElementById("open-cart-btn").addEventListener("click", openCartDrawerInterface);
-            document.getElementById("close-cart-btn").addEventListener("click", closeCartDrawerInterface);
-            document.getElementById("cart-overlay").addEventListener("click", (e) => {
-                if(e.target === document.getElementById("cart-overlay")) closeCartDrawerInterface();
-            });
-        }
-
-        /* --- 8. PRODUCT DETAILED MODAL INTERACTIVE MANAGER --- */
-        function openQuickViewModal(productId) {
-            const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+        function openProductQuickViewModal(productId) {
+            const product = PRODUCTS_DATASET.find(p => p.id === productId);
             if (!product) return;
 
-            const modalContainer = document.getElementById("modal-dynamic-target");
-            modalContainer.innerHTML = `
-                <div class="modal-image">
-                    <img src="${product.image}" alt="${product.title}">
-                </div>
-                <div class="modal-content">
-                    <span class="modal-cat">${product.category}</span>
-                    <h2 class="modal-title">${product.title}</h2>
-                    <div class="modal-price">$${product.price.toFixed(2)}</div>
-                    <p class="modal-desc">${product.desc}</p>
-                    <button class="btn btn-primary" onclick="closeProductQuickViewModal(); addItemToSystemCart('${product.id}');">Add Formula to Basket</button>
-                </div>
-            `;
+            document.getElementById("modalProductCategory").innerText = product.category;
+            document.getElementById("modalProductName").innerText = product.name;
+            document.getElementById("modalProductPrice").innerText = `$${product.price.toFixed(2)}`;
+            document.getElementById("modalProductDescription").innerText = product.desc;
+            document.getElementById("modalProductImageText").innerText = product.name;
 
-            document.getElementById("product-modal").classList.add("active");
+            const actionBtn = document.getElementById("modalAddToCartActionBtn");
+            actionBtn.onclick = () => {
+                addProductToShoppingCart(product.id);
+                closeProductQuickViewModal();
+            };
+
+            modalOverlay.classList.add("active");
         }
 
         function closeProductQuickViewModal() {
-            document.getElementById("product-modal").classList.remove("active");
+            modalOverlay.classList.remove("active");
         }
 
-        /* --- 9. INTERFACE FILTERS AND INPUT EVENTS --- */
-        function initCatalogFilters() {
-            document.querySelectorAll(".filter-btn").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                    e.currentTarget.classList.add("active");
-                    ACTIVE_FILTER = e.currentTarget.getAttribute("data-filter");
-                    renderCatalogGrid();
-                });
-            });
-        }
-
-        function initSearchAndSort() {
-            document.getElementById("catalog-search").addEventListener("input", (e) => {
-                SEARCH_QUERY = e.target.value;
-                renderCatalogGrid();
-            });
-
-            document.getElementById("catalog-sort").addEventListener("change", (e) => {
-                SORT_METHOD = e.target.value;
-                renderCatalogGrid();
-            });
-
-            document.getElementById("close-modal-btn").addEventListener("click", closeProductQuickViewModal);
-            document.getElementById("product-modal").addEventListener("click", (e) => {
-                if (e.target === document.getElementById("product-modal")) closeProductQuickViewModal();
-            });
-        }
-
-        /* --- 10. SYSTEM NAVIGATION SCROLL DECORATORS --- */
-        function initHeaderTracking() {
-            const header = document.getElementById("main-header");
-            window.addEventListener("scroll", () => {
-                if (window.scrollY > 50) {
-                    header.classList.add("scrolled");
-                } else {
-                    header.classList.remove("scrolled");
-                }
-            });
-        }
-
-        function initMobileNavigation() {
-            const toggle = document.getElementById("menu-toggle");
-            const navLinks = document.getElementById("nav-links");
+        /* ==========================================================================
+           7. DIAGNOSTIC QUIZ LOGIC AND STEPPING
+           ========================================================================== */
+        function selectQuizOption(pillElement, axisValue) {
+            const container = pillElement.parentElement;
+            container.querySelectorAll(".quiz-option-pill").forEach(p => p.classList.remove("selected"));
+            pillElement.classList.add("selected");
             
-            toggle.addEventListener("click", () => {
-                navLinks.classList.toggle("active");
-                toggle.innerHTML = navLinks.classList.contains("active") ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars-staggered"></i>';
-            });
-
-            document.querySelectorAll(".nav-menu a").forEach(link => {
-                link.addEventListener("click", () => {
-                    navLinks.classList.remove("active");
-                    toggle.innerHTML = '<i class="fa-solid fa-bars-staggered"></i>';
-                });
-            });
+            const stepNode = pillElement.closest(".quiz-step-pane");
+            const currentStep = stepNode.getAttribute("data-step");
+            SELECTED_QUIZ_RESPONSES[currentStep] = axisValue;
         }
 
-        /* --- 11. REUSABLE CAROUSEL & ACCORDION COMPONENT ENGINE --- */
-        function initTestimonialEngine() {
-            const dots = document.querySelectorAll(".slider-dot");
-            const slides = document.querySelectorAll(".testimonial-slide");
-
-            dots.forEach(dot => {
-                dot.addEventListener("click", (e) => {
-                    const targetSlideIndex = parseInt(e.currentTarget.getAttribute("data-slide"));
-                    
-                    dots.forEach(d => d.classList.remove("active"));
-                    slides.forEach(s => s.classList.remove("active"));
-
-                    e.currentTarget.classList.add("active");
-                    document.querySelector(`.testimonial-slide[data-index="${targetSlideIndex}"]`).classList.add("active");
-                });
-            });
+        function advanceQuizStep(currentStep) {
+            if (!SELECTED_QUIZ_RESPONSES[currentStep]) {
+                alert("Please declare a selection variable metric to proceed.");
+                return;
+            }
+            const currentPane = document.querySelector(`.quiz-step-pane[data-step="${currentStep}"]`);
+            const nextPane = document.querySelector(`.quiz-step-pane[data-step="${currentStep + 1}"]`);
+            
+            currentPane.classList.remove("active");
+            nextPane.classList.add("active");
+            
+            document.getElementById("quizProgressFill").style.width = `${((currentStep + 1) / 3) * 100}%`;
         }
 
-        function initAccordionFaqEngine() {
-            document.querySelectorAll(".faq-header").forEach(item => {
-                item.addEventListener("click", () => {
-                    const parent = item.parentElement;
-                    const isOpen = parent.classList.contains("active");
-                    
-                    document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
-                    
-                    if (!isOpen) {
-                        parent.classList.add("active");
-                    }
-                });
+        function reverseQuizStep(currentStep) {
+            const currentPane = document.querySelector(`.quiz-step-pane[data-step="${currentStep}"]`);
+            const prevPane = document.querySelector(`.quiz-step-pane[data-step="${currentStep - 1}"]`);
+            
+            currentPane.classList.remove("active");
+            prevPane.classList.add("active");
+            
+            document.getElementById("quizProgressFill").style.width = `${((currentStep - 1) / 3) * 100}%`;
+        }
+
+        function computeQuizResults() {
+            if (!SELECTED_QUIZ_RESPONSES[3]) {
+                alert("Please declare a final selection variable metric.");
+                return;
+            }
+            
+            document.querySelector(`.quiz-step-pane[data-step="3"]`).classList.remove("active");
+            const resultsPanel = document.getElementById("quizResultPanel");
+            resultsPanel.classList.add("active");
+
+            const narrativeBox = document.getElementById("quizResultTextNarrative");
+            const productNameBox = document.getElementById("quizRecommendedProductName");
+
+            if (SELECTED_QUIZ_RESPONSES[1] === "Oily") {
+                narrativeBox.innerText = "Your cellular profile shows elevated sebum breakout vectors paired alongside atmospheric structural pollution sensitivity.";
+                productNameBox.innerText = "Niacinamide Zinc Balance Complex";
+            } else if (SELECTED_QUIZ_RESPONSES[1] === "Dry") {
+                narrativeBox.innerText = "Your moisture lipid markers drop precipitously during day windows, indicating deep trans-epidermal hydration requirements.";
+                productNameBox.innerText = "Ceramide Restorative Balm";
+            } else {
+                narrativeBox.innerText = "Your skin displays typical uneven cell matrix distribution traits demanding targeted cellular exfoliation pathways.";
+                productNameBox.innerText = "Bakuchiol Cellular Infusion";
+            }
+        }
+
+        function closeQuizAndScrollToCatalog() {
+            document.getElementById("quizResultPanel").classList.remove("active");
+            document.querySelector(`.quiz-step-pane[data-step="1"]`).classList.add("active");
+            document.getElementById("quizProgressFill").style.width = "33.33%";
+            SELECTED_QUIZ_RESPONSES = {};
+            document.querySelectorAll(".quiz-option-pill").forEach(p => p.classList.remove("selected"));
+        }
+
+        /* ==========================================================================
+           8. TESTIMONIAL SLIDER ANIMATOR ENGINE
+           ========================================================================== */
+        let MASTER_TESTIMONIAL_INDEX = 0;
+
+        function shiftTestimonialSlide(directionVector) {
+            const track = document.getElementById("testimonialSliderTrack");
+            const totalSlides = track.children.length;
+
+            MASTER_TESTIMONIAL_INDEX += directionVector;
+
+            if (MASTER_TESTIMONIAL_INDEX >= totalSlides) {
+                MASTER_TESTIMONIAL_INDEX = 0;
+            }
+            if (MASTER_TESTIMONIAL_INDEX < 0) {
+                MASTER_TESTIMONIAL_INDEX = totalSlides - 1;
+            }
+
+            track.style.transform = `translateX(-${MASTER_TESTIMONIAL_INDEX * 100}%)`;
+        }
+
+        /* ==========================================================================
+           9. ACCORDION UI INTERACTION CONTROLLER
+           ========================================================================== */
+        function toggleFaqAccordionNode(headerClicked) {
+            const targetNode = headerClicked.parentElement;
+            const currentPanel = targetNode.querySelector(".faq-collapsible-panel");
+            const isActive = targetNode.classList.contains("active");
+
+            document.querySelectorAll(".faq-item-node").forEach(node => {
+                node.classList.remove("active");
+                node.querySelector(".faq-collapsible-panel").style.maxHeight = null;
             });
+
+            if (!isActive) {
+                targetNode.classList.add("active");
+                currentPanel.style.maxHeight = currentPanel.scrollHeight + "px";
+            }
+        }
+
+        /* ==========================================================================
+           10. AUXILIARY FORM VALIDATION TRANSMISSION
+           ========================================================================== */
+        function handleFormSubmission(eventInstance) {
+            eventInstance.preventDefault();
+            alert("Transmission complete. Aura concierge agents have received your digital profile parameters safely.");
+            document.getElementById("contactRitualForm").reset();
+        }
+
+        function handleNewsletterSubscription() {
+            const inputField = document.getElementById("newsletterEmailInput");
+            if (inputField.value.trim() === "" || !inputField.value.includes("@")) {
+                alert("Please supply an authentic electronic mail route mapping.");
+                return;
+            }
+            alert("Entry credentials verified. Welcome to the Aura Micro-batch cohort updates matrix.");
+            inputField.value = "";
         }
     </script>
 </body>
